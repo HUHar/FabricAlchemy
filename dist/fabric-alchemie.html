@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fabric Alchemie</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#111a2e; --panel2:#16223a; --line:#26365a;
+    --text:#e8eefc; --muted:#8fa3c8; --accent:#2dd4bf; --accent2:#60a5fa; --warn:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:"Segoe UI",system-ui,sans-serif; color:var(--text);
+    background:radial-gradient(1200px 700px at 20% 0%,#15305a 0%,var(--bg) 60%);
+    display:flex; flex-direction:column; overflow:hidden; user-select:none; -webkit-user-select:none;
+  }
+  header{
+    display:flex; align-items:center; gap:14px; padding:10px 16px;
+    border-bottom:1px solid var(--line); background:rgba(11,18,32,.7); backdrop-filter:blur(6px);
+    flex-wrap:wrap;
+  }
+  h1{font-size:1.15rem;margin:0;letter-spacing:.3px}
+  h1 .accent{color:var(--accent)}
+  .progress{flex:1;min-width:160px;max-width:340px}
+  .bar{height:8px;border-radius:99px;background:var(--panel2);overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
+  .count{font-size:.78rem;color:var(--muted);margin-top:3px}
+  .btns{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+  button{
+    background:var(--panel2);color:var(--text);border:1px solid var(--line);
+    padding:7px 12px;border-radius:8px;font:inherit;font-size:.85rem;cursor:pointer;
+  }
+  button:hover{border-color:var(--accent)}
+  main{flex:1;display:flex;min-height:0}
+  #ws{
+    flex:1;position:relative;min-width:0;
+    background-image:radial-gradient(circle,#1e2d4d 1px,transparent 1px);background-size:26px 26px;
+  }
+  #empty{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;
+    color:var(--muted);pointer-events:none;padding:24px;font-size:1.05rem;line-height:1.6;
+  }
+  aside{
+    width:300px;display:flex;flex-direction:column;background:var(--panel);
+    border-left:1px solid var(--line);min-height:0;transition:background .15s, border-color .15s;
+  }
+  aside.trash{background:#3a1620;border-color:#ef4444}
+  aside .top{padding:10px;border-bottom:1px solid var(--line);display:flex;gap:8px}
+  aside input{
+    flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);color:var(--text);
+    border-radius:8px;padding:7px 10px;font:inherit;font-size:.85rem;user-select:text;-webkit-user-select:text;
+  }
+  #list{flex:1;overflow:auto;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  .chip,.item{
+    display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:10px;
+    background:var(--panel2);border:1px solid var(--line);font-size:.88rem;white-space:nowrap;
+    touch-action:none;cursor:grab;
+  }
+  .chip:hover{border-color:var(--accent)}
+  .chip.base{border-color:#3b82f6;background:#152a4d}
+  .chip.fresh::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--warn);margin-left:2px}
+  .chip .e,.item .e{font-size:1.15rem;line-height:1}
+  .item{position:absolute;transform:translate(-50%,-50%);z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.35);
+    animation:pop .25s ease-out}
+  .item.base{border-color:#3b82f6;background:#152a4d}
+  .item.drag{cursor:grabbing;z-index:50;box-shadow:0 10px 26px rgba(0,0,0,.5);border-color:var(--accent)}
+  .item.target{border-color:var(--warn);box-shadow:0 0 0 3px rgba(245,158,11,.35)}
+  .item.shake{animation:shake .35s}
+  .item.glow{animation:glow 1s ease-out}
+  .item.hint,.chip.hint{border-color:var(--warn);box-shadow:0 0 0 3px rgba(245,158,11,.45)}
+  @keyframes pop{from{transform:translate(-50%,-50%) scale(.6);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
+  @keyframes shake{0%,100%{margin-left:0}25%{margin-left:-7px}75%{margin-left:7px}}
+  @keyframes glow{0%{box-shadow:0 0 0 0 rgba(45,212,191,.9)}100%{box-shadow:0 0 0 26px rgba(45,212,191,0)}}
+  #tip{
+    position:fixed;z-index:150;max-width:290px;display:none;background:#0d1730;border:1px solid var(--accent);
+    border-radius:12px;padding:11px 14px;font-size:.85rem;line-height:1.45;box-shadow:0 10px 30px rgba(0,0,0,.55);
+  }
+  #tip .h{font-weight:600;margin-bottom:3px}
+  #tip .d{color:var(--muted)}
+  #tip a{display:block;margin-top:7px;color:var(--accent2);text-decoration:none}
+  #tip a:hover{text-decoration:underline}
+  #toast{
+    position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);
+    background:#0f2a2a;border:1px solid var(--accent);color:var(--text);
+    padding:11px 16px;border-radius:12px;max-width:min(520px,92vw);opacity:0;pointer-events:none;
+    transition:.3s;z-index:100;text-align:center;font-size:.9rem;line-height:1.4;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  #toast b{color:var(--accent)}
+  #toast.info{background:#2a2410;border-color:var(--warn)}
+  #toast.info b{color:var(--warn)}
+  #win{
+    position:fixed;inset:0;background:rgba(5,10,20,.8);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;
+  }
+  #win.show{display:flex}
+  #win div{background:var(--panel);border:1px solid var(--accent);border-radius:16px;padding:26px;max-width:460px;text-align:center;line-height:1.55}
+  #win h2{margin:0 0 8px;color:var(--accent)}
+  @media (max-width:720px){
+    main{flex-direction:column}
+    aside{width:100%;height:42%;border-left:0;border-top:1px solid var(--line)}
+    .btns{margin-left:0}
+  }
+
+select{
+  background:var(--panel2);color:var(--text);border:1px solid var(--line);
+  padding:7px 10px;border-radius:8px;font:inherit;font-size:.85rem;cursor:pointer;
+}
+select:hover{border-color:var(--accent)}
+
+</style>
+</head>
+<body>
+<header>
+  <h1><span data-i18n="titleA"></span> <span class="accent" data-i18n="titleB"></span></h1>
+  <div class="progress">
+    <div class="bar"><i id="bar"></i></div>
+    <div class="count" id="count"></div>
+  </div>
+  <div class="btns">
+    <select id="langSel" aria-label="Language"></select>
+    <button id="hintBtn" data-i18n="hint" data-i18n-title="hintTitle"></button>
+    <button id="clearBtn" data-i18n="clear"></button>
+    <button id="resetBtn" data-i18n="reset"></button>
+  </div>
+</header>
+<main>
+  <div id="ws"><div id="empty" data-i18n-html="empty"></div></div>
+  <aside id="side">
+    <div class="top"><input id="search" type="search" data-i18n-placeholder="search" autocomplete="off"></div>
+    <div id="list"></div>
+  </aside>
+</main>
+<div id="tip"></div>
+<div id="toast"></div>
+<div id="win"><div>
+  <h2 data-i18n="winTitle"></h2>
+  <p id="winText"></p>
+  <button id="winClose" data-i18n="winClose"></button>
+</div></div>
+
+<script>
+const I18N_ALL = {"de":{"lang":"de","name":"Deutsch","learn":"https://learn.microsoft.com/de-de","ui":{"title":"Fabric Alchemie","titleA":"Fabric","titleB":"Alchemie","hint":"💡 Hinweis","hintTitle":"Zeigt eine noch unentdeckte Kombination","clear":"🧹 Fläche leeren","reset":"↺ Neu starten","empty":"Ziehe Elemente aus der Liste auf die Fläche<br>und lege sie übereinander, um neue zu erschaffen.","search":"Element suchen …","count":"{n} von {total} Elementen entdeckt","noReaction":"<b>{a}</b> und <b>{b}</b> passen nicht zusammen.","newFound":"{emoji} Neu entdeckt: <b>{name}</b><br>{desc}","winTitle":"🎉 Ziel erreicht: Datenteam!","winText":"Du hast {n} von {total} Elementen entdeckt. Aus Daten, Rechenleistung, Speicher und Netzwerk ist ein ganzes Fabric-Datenteam entstanden.","winMissing":" Ein paar Elemente fehlen noch – spiele weiter!","winClose":"Weiterspielen","resetConfirm":"Alle Entdeckungen löschen und neu beginnen?","allFound":"Du hast <b>alles</b> entdeckt! 🏆","noHint":"Aktuell gibt es keine neue Kombination aus deinen Elementen.","hintMsg":"💡 Hinweis: Kombiniere <b>{a}</b> mit <b>{b}</b>.","learnLink":"📘 Microsoft Learn: Dokumentation","videoLink":"▶ Video ansehen"},"elements":{"daten":["Daten","Der Rohstoff von allem: Fakten, Zahlen und Zeichen."],"rechen":["Rechenleistung","Die Energie, die Daten in Erkenntnisse verwandelt."],"speicher":["Speicher","Ein Ort, an dem Daten dauerhaft bleiben."],"netz":["Netzwerk","Verbindet alles mit allem."],"datensatz":["Datensatz","Zusammengehörige Daten zu einem einzelnen Eintrag."],"datensaetze":["Datensätze","Mehrere Datensätze zusammen – die Rohform einer Tabelle."],"server":["Server","Rechenleistung, ans Netzwerk angeschlossen."],"onpremgw":["On-Premises-Datengateway","Die sichere Brücke zwischen lokalen Datenquellen und der Cloud."],"cloudverb":["Cloudverbindung","Gespeicherte Anmeldung und Verbindung zu einer Datenquelle in der Cloud."],"cache":["Cache","Häufig genutzte Daten, schnell erreichbar."],"skript":["Skript","Anweisungen, die Rechenleistung auf Daten anwendet."],"datei":["Datei","Daten mit Namen, dauerhaft auf einem Speicher abgelegt."],"excel":["Excel","Die Tabellenkalkulation, in der viele Daten beginnen und enden."],"csv":["CSV","Einfache Textdatei mit Werten, die durch Trennzeichen getrennt sind."],"export":["Export","Daten aus Power BI in eine Datei herausschreiben."],"uhr":["Uhr","Gibt den Takt vor – ohne sie gäbe es kein „jetzt“."],"bewegung":["Datenbewegung","Daten wandern von einem Ort zum anderen."],"cloud":["Cloud","Speicher und Netzwerk, überall verfügbar."],"fabric":["Microsoft Fabric","Die einheitliche Analyseplattform: Daten im Netzwerk, alles aus einem Guss."],"tabelle":["Tabelle","Zeilen und Spalten – die Grundform strukturierter Daten."],"datenbank":["Datenbank","Organisierte Tabellen mit Speicher und Regeln."],"clouddb":["Cloud-Datenbank","Eine Datenbank, die als Dienst in der Cloud läuft."],"sqlserver":["SQL Server","Microsofts relationale Datenbank-Engine."],"dataflow":["Dataflow Gen2","Daten mit Power Query ohne Code aufbereiten."],"dataflowgen1":["Dataflow Gen1","Die erste Generation der Dataflows in Power BI – der Vorgänger von Gen2."],"notebook":["Notebook","Code, Text und Ergebnisse in einem interaktiven Dokument in Fabric."],"sekunde":["Sekunde","Die kleinste Einheit, in der Echtzeit noch zählt."],"transformation":["Transformation","Daten umformen, bereinigen und anreichern."],"ereignis":["Ereignis","Etwas ist passiert – mit Zeitstempel."],"aktion":["Aktion","Die Reaktion auf ein Ereignis."],"kopie":["Kopie","Ein Abbild der Daten an einem zweiten Ort."],"abkuerzung":["Abkürzung","Der schnelle Weg zu Daten – ohne Umweg und ohne Kopie."],"sensor":["Sensor","Misst die Welt und liefert Datensätze."],"iot":["IoT","Das Internet der Dinge: Geräte, die Daten senden."],"batch":["Batchverarbeitung","Viele Daten auf einmal, zu festen Zeiten."],"orchestrierung":["Orchestrierung","Aufgaben in der richtigen Reihenfolge und zur richtigen Zeit ausführen."],"quelle":["Quelle","Der Ort, von dem Daten kommen."],"ziel":["Ziel","Der Ort, an den Daten sollen."],"etl":["ETL","Extrahieren, transformieren, laden – der Klassiker der Datenintegration."],"dqchecks":["Datenqualitätsprüfungen","Automatische Tests, ob Daten vollständig, eindeutig und plausibel sind."],"lowcode":["Low-Code","Anwendungen per Klick statt per Code bauen."],"analyse":["Analyse","Aus Tabellen und Rechenleistung entsteht Einsicht."],"logfiles":["Protokolldateien","Log-Files: die Spuren, die Systeme über ihr Verhalten hinterlassen."],"abfrage":["Abfrage","Eine Frage an eine Datenbank."],"suche":["Suche","Das Gesuchte in einer Flut von Daten finden."],"ki":["KI","Maschinen, die aus Daten lernen und Aufgaben lösen."],"kapazitaet":["Kapazität","Rechenkontingent, das man in der Cloud bucht."],"fabcap":["Fabric-Kapazität","Die Rechenleistung, die sich alle Fabric-Workloads teilen."],"fuam":["FUAM","Fabric Unified Admin Monitoring: Nutzung, Kapazität und Aktivitäten zentral auswerten."],"reservierung":["Reservierung","Kapazität im Voraus für ein oder mehrere Jahre buchen – und dabei sparen."],"azure":["Microsoft Azure","Microsofts Cloud-Plattform – das Fundament von Fabric."],"adf":["Azure Data Factory","Der Cloud-Dienst für Datenintegration, aus dem Fabrics Data Factory hervorging."],"onelake":["OneLake","Der eine Datensee für die gesamte Organisation – „das OneDrive für Daten“."],"arbeitsbereich":["Arbeitsbereich","Ein Ort in Fabric, an dem Teams Elemente gemeinsam bearbeiten."],"lakehouse":["Lakehouse","Der Datensee mit Tabellenstruktur: das Beste aus Lake und Warehouse."],"warehouse":["Data Warehouse","Relationales Lager für analytische Auswertungen im großen Stil."],"datenstrom":["Datenstrom","Daten, die ununterbrochen durchs Netzwerk fließen."],"eventstream":["Eventstream","Fabric erfasst und verarbeitet Ereignisse in Echtzeit."],"eventhouse":["Eventhouse","Speichert Ereignisdaten zeitlich sortiert und blitzschnell abfragbar."],"kql":["KQL","Kusto-Abfragesprache für Echtzeit- und Logdaten."],"echtzeit":["Real-Time Intelligence","Erkenntnisse aus Ereignissen, während sie geschehen."],"aktivator":["Aktivator","Löst Aktionen aus, sobald Daten eine Bedingung erfüllen."],"alert":["Alert","Benachrichtigt dich, sobald eine Kennzahl einen Schwellenwert überschreitet."],"kennzahl":["Kennzahl","Berechneter Wert, der zeigt, wie es läuft."],"dax":["DAX","Formelsprache für Kennzahlen im semantischen Modell."],"m":["M (Power Query)","Die Formelsprache hinter Power Query und Dataflows."],"beziehung":["Beziehung","Verbindet Tabellen über gemeinsame Schlüssel."],"rel11":["1:1-Beziehung","Jeder Datensatz hat genau einen Partner auf der anderen Seite (z. B. Person ↔ Ausweis)."],"reln":["1:n-Beziehung","Ein Datensatz, viele Partner (z. B. ein Kunde, viele Bestellungen) – der Standard im Sternschema."],"relnm":["n:m-Beziehung","Viele auf viele (z. B. Kurse ↔ Teilnehmer) – braucht Kreuzfilter oder eine Brückentabelle."],"semmodell":["Semantisches Modell","Tabellen, Beziehungen und Kennzahlen mit Geschäftsbedeutung."],"visual":["Visualisierung","Zahlen, die man auf einen Blick versteht."],"bericht":["Bericht","Mehrere Visualisierungen, die eine Geschichte erzählen."],"powerbi":["Power BI","Business Intelligence: Daten sehen, teilen, verstehen."],"directlake":["Direct Lake","Berichte lesen Delta-Tabellen direkt aus OneLake – ohne Import."],"dashboard":["Dashboard","Fasst Kacheln aus mehreren Power-BI-Berichten auf einer Seite zusammen."],"factory":["Data Factory","Die Fabric-Erfahrung für Datenintegration und Orchestrierung."],"pipeline":["Datenpipeline","Orchestriert Schritte, die Daten von A nach B bringen."],"copyact":["Kopieraktivität","Der Baustein einer Pipeline, der Daten von der Quelle ins Ziel kopiert."],"copyjob":["Kopierauftrag","Kopiert Daten einfach und schnell in Fabric hinein."],"verknuepfung":["Verknüpfung","Verweist auf Daten an einem anderen Ort – ganz ohne Kopie."],"spiegelung":["Spiegelung","Hält eine Datenbank fast in Echtzeit in OneLake gespiegelt."],"sql":["T-SQL","Die Sprache, in der SQL Server und Warehouses antworten."],"sqlendpunkt":["SQL-Analyseendpunkt","Lässt Lakehouse-Tabellen mit T-SQL abfragen."],"sprachen":["Notebook-Sprachen","Python, Scala, R und SQL: alles, was ein Fabric-Notebook versteht."],"spark":["Apache Spark","Verteilte Verarbeitung riesiger Datenmengen im Notebook."],"pyspark":["PySpark","Spark, gesteuert mit Python."],"python":["Python","Die beliebteste Notebook-Sprache für Daten, Analyse und KI."],"scala":["Scala","Die Sprache, in der Spark selbst geschrieben ist."],"r":["R","Sprache für Statistik und Diagramme (SparkR im Notebook)."],"sparksql":["Spark SQL","SQL direkt auf Lakehouse-Tabellen, ausgeführt von Spark."],"cluster":["Cluster","Viele Server, die zusammen arbeiten."],"sparkpool":["Spark-Pool","Vorbereitete Rechenknoten für Spark-Aufträge."],"parquet":["Parquet","Spaltenorientiertes, komprimiertes Dateiformat für Analysen."],"delta":["Delta-Tabelle","Parquet plus Transaktionsprotokoll: zuverlässig und versionierbar."],"timetravel":["Time Travel","Frühere Versionen einer Delta-Tabelle abfragen oder wiederherstellen."],"vorder":["V-Order","Fabric-Optimierung für blitzschnelle Parquet-Lesevorgänge."],"bronze":["Bronze-Schicht","Rohdaten, so wie sie im Lakehouse ankommen."],"silber":["Silber-Schicht","Bereinigte und validierte Daten."],"gold":["Gold-Schicht","Kuratierte Daten, bereit für Berichte."],"medallion":["Medallion-Architektur","Bronze, Silber, Gold: Daten reifen Schicht für Schicht."],"dataeng":["Data Engineering","Daten im Lakehouse mit Spark transformieren."],"datamodelling":["Datenmodellierung","Tabellen, Schlüssel und Beziehungen so entwerfen, dass Analysen einfach werden."],"ml":["Maschinelles Lernen","Muster in Daten erkennen, statt sie zu programmieren."],"mlmodell":["ML-Modell","Gelerntes Wissen, das Vorhersagen trifft."],"experiment":["Experiment","Trainingsläufe vergleichen und den besten wählen."],"datascience":["Data Science","Modelle bauen, testen und einsetzen."],"copilot":["Copilot","Ein KI-Assistent, der beim Schreiben von Code und Text hilft."],"copilotfab":["Copilot in Fabric","KI-Assistent in Fabric, der Code, Abfragen und Berichte mitschreibt."],"agent":["Data Agent","Beantwortet Fragen in natürlicher Sprache zu deinen Daten."],"semlink":["Semantic Link","Verbindet Notebooks mit semantischen Modellen."],"berechtigung":["Berechtigung","Wer darf was im Arbeitsbereich?"],"sicherheit":["Datensicherheit","Schützt Daten vor unbefugtem Zugriff."],"onelakesec":["OneLake-Sicherheit","Zugriffsrollen bis auf Ordner-, Tabellen-, Zeilen- und Spaltenebene direkt in OneLake."],"rls":["Zeilenebenensicherheit","Row-Level-Security: Jede Person sieht nur die Zeilen, die für sie bestimmt sind."],"katalog":["OneLake-Katalog","Hier findet man Fabric-Elemente und versteht sie."],"governance":["Governance","Regeln und Verantwortung für den Umgang mit Daten."],"purview":["Microsoft Purview","Governance und Schutz über den gesamten Datenbestand."],"herkunft":["Datenherkunft","Woher stammen die Daten, und wohin fließen sie?"],"mandant":["Mandant","Die Organisation und ihre gesamte Fabric-Umgebung."],"domaene":["Domäne","Gruppiert Arbeitsbereiche nach Fachbereich."],"datamesh":["Data Mesh","Dezentrale Datenverantwortung in den Fachdomänen."],"skalierung":["Skalierung","Mehr (oder weniger) Rechenleistung bei Bedarf."],"sku":["F-SKU","Fabric-Kapazitätsstufe (F2 bis F2048): bestimmt, wie viel Rechenleistung du bekommst."],"optimierung":["Optimierung","Schneller, günstiger, besser."],"partition":["Partition","Große Tabellen in handliche Stücke geteilt."],"index":["Index","Ein Inhaltsverzeichnis, das Abfragen beschleunigt."],"synapse":["Azure Synapse","Der Vorgänger-Analysedienst, dessen Ideen in Fabric weiterleben."],"adls":["Azure Data Lake Storage","Cloudspeicher für riesige Mengen an Dateien."],"s3":["Amazon S3","Der Objektspeicher von AWS – per Verknüpfung direkt in OneLake nutzbar."],"databricks":["Databricks","Lakehouse-Plattform auf Basis von Spark."],"snowflake":["Snowflake","Cloud-Data-Warehouse eines anderen Anbieters."],"cosmos":["Cosmos DB","Global verteilte NoSQL-Datenbank von Azure."],"azuresql":["Azure SQL","SQL Server als verwalteter Cloud-Dienst."],"sap":["SAP","Die Unternehmenssoftware, in der viele Firmen-Kerndaten liegen."],"gitgen":["Git","Versionsverwaltung für Code und Dateien."],"github":["GitHub","Plattform zum Teilen und Verwalten von Git-Repositories."],"azdevops":["Azure DevOps","Repos, Boards und Pipelines für Entwicklungsteams."],"gitint":["Git-Integration","Versionsverwaltung für Arbeitsbereiche."],"entwicklung":["DEV (Entwicklung)","Hier wird gebaut und ausprobiert."],"test":["Test","Prüft, ob alles wie erwartet funktioniert."],"produktion":["PROD (Produktion)","Die Umgebung, in der die Nutzer arbeiten."],"bereitstellung":["Bereitstellung","Inhalte in eine Zielumgebung ausrollen."],"deploy":["Bereitstellungspipeline","Bringt Inhalte von Entwicklung über Test in die Produktion."],"monitoring":["Überwachung","Behalte im Blick, ob alles gesund läuft."],"monhub":["Überwachungshub","Zentraler Ort in Fabric, um alle Aktivitäten zu überwachen."],"admin":["Admin","Verwaltet, konfiguriert und schützt die Plattform."],"adminportal":["Admin-Portal","Zentrale Verwaltungsoberfläche für Fabric-Einstellungen."],"rest":["REST","Programmierschnittstellen über normale Web-Anfragen."],"api":["API","Eine Schnittstelle, über die Programme miteinander sprechen."],"restapi":["Fabric-REST-APIs","Fabric per Code steuern – auch für Terraform und Automatisierung."],"cli":["CLI","Bedienung per Kommandozeile."],"fabcli":["Fabric CLI","Fabric-Elemente per Befehlszeile verwalten."],"terraform":["Terraform","Infrastruktur als Code, auch für Fabric-Ressourcen."],"ingenieur":["Dateningenieur","Baut die Pipelines, die alles am Laufen halten."],"analyst":["Datenanalyst","Verwandelt Kennzahlen in Entscheidungen."],"team":["Datenteam","Ingenieure und Analysten – gemeinsam unschlagbar."]}},"en":{"lang":"en","name":"English","learn":"https://learn.microsoft.com/en-us","ui":{"title":"Fabric Alchemy","titleA":"Fabric","titleB":"Alchemy","hint":"💡 Hint","hintTitle":"Shows a combination you haven't discovered yet","clear":"🧹 Clear board","reset":"↺ Start over","empty":"Drag elements from the list onto the board<br>and drop them on each other to create new ones.","search":"Search elements …","count":"{n} of {total} elements discovered","noReaction":"<b>{a}</b> and <b>{b}</b> don't go together.","newFound":"{emoji} Newly discovered: <b>{name}</b><br>{desc}","winTitle":"🎉 Goal reached: Data team!","winText":"You discovered {n} of {total} elements. From data, compute, storage and network you built an entire Fabric data team.","winMissing":" A few elements are still missing – keep playing!","winClose":"Keep playing","resetConfirm":"Delete all discoveries and start over?","allFound":"You have discovered <b>everything</b>! 🏆","noHint":"There is no new combination available with your current elements.","hintMsg":"💡 Hint: combine <b>{a}</b> with <b>{b}</b>.","learnLink":"📘 Microsoft Learn: Documentation","videoLink":"▶ Watch video"},"elements":{"daten":["Data","The raw material of everything: facts, numbers and characters."],"rechen":["Compute","The energy that turns data into insight."],"speicher":["Storage","A place where data stays for good."],"netz":["Network","Connects everything with everything."],"datensatz":["Record","Related data forming a single entry."],"datensaetze":["Records","Several records together – the raw form of a table."],"server":["Server","Compute power connected to a network."],"onpremgw":["On-premises data gateway","The secure bridge between local data sources and the cloud."],"cloudverb":["Cloud connection","Saved credentials and connection to a data source in the cloud."],"cache":["Cache","Frequently used data, quick to reach."],"skript":["Script","Instructions that apply compute to data."],"datei":["File","Data with a name, stored permanently on a storage."],"excel":["Excel","The spreadsheet where much data begins and ends."],"csv":["CSV","A simple text file with values separated by delimiters."],"export":["Export","Write data from Power BI out to a file."],"uhr":["Clock","Sets the beat – without it there would be no “now”."],"bewegung":["Data movement","Data travels from one place to another."],"cloud":["Cloud","Storage and network, available everywhere."],"fabric":["Microsoft Fabric","The unified analytics platform: data on a network, all from one piece."],"tabelle":["Table","Rows and columns – the basic form of structured data."],"datenbank":["Database","Organized tables with storage and rules."],"clouddb":["Cloud database","A database that runs as a service in the cloud."],"sqlserver":["SQL Server","Microsoft's relational database engine."],"dataflow":["Dataflow Gen2","Prepare data with Power Query, no code needed."],"dataflowgen1":["Dataflow Gen1","The first generation of dataflows in Power BI – the predecessor of Gen2."],"notebook":["Notebook","Code, text and results in one interactive document in Fabric."],"sekunde":["Second","The smallest unit in which real time still counts."],"transformation":["Transformation","Reshape, clean and enrich data."],"ereignis":["Event","Something happened – with a timestamp."],"aktion":["Action","The reaction to an event."],"kopie":["Copy","An image of the data in a second place."],"abkuerzung":["Fast path","The quick way to data – no detour and no copy."],"sensor":["Sensor","Measures the world and delivers records."],"iot":["IoT","The Internet of Things: devices that send data."],"batch":["Batch processing","Lots of data at once, at fixed times."],"orchestrierung":["Orchestration","Run tasks in the right order and at the right time."],"quelle":["Source","The place data comes from."],"ziel":["Destination","The place data should go to."],"etl":["ETL","Extract, transform, load – the classic of data integration."],"dqchecks":["Data quality checks","Automatic tests for whether data is complete, unique and plausible."],"lowcode":["Low-code","Build applications with clicks instead of code."],"analyse":["Analysis","Insight arises from tables and compute."],"logfiles":["Log files","The traces systems leave behind about their behavior."],"abfrage":["Query","A question to a database."],"suche":["Search","Find what you are looking for in a flood of data."],"ki":["AI","Machines that learn from data and solve tasks."],"kapazitaet":["Capacity","A compute allowance you book in the cloud."],"fabcap":["Fabric capacity","The compute power shared by all Fabric workloads."],"fuam":["FUAM","Fabric Unified Admin Monitoring: evaluate usage, capacity and activities in one place."],"reservierung":["Reservation","Book capacity in advance for one or more years – and save."],"azure":["Microsoft Azure","Microsoft's cloud platform – the foundation of Fabric."],"adf":["Azure Data Factory","The cloud service for data integration that Fabric's Data Factory grew out of."],"onelake":["OneLake","The one data lake for the whole organization – “the OneDrive for data”."],"arbeitsbereich":["Workspace","A place in Fabric where teams work on items together."],"lakehouse":["Lakehouse","The data lake with table structure: the best of lake and warehouse."],"warehouse":["Data warehouse","Relational storehouse for analytical workloads at scale."],"datenstrom":["Data stream","Data that flows through the network without interruption."],"eventstream":["Eventstream","Fabric captures and processes events in real time."],"eventhouse":["Eventhouse","Stores event data sorted by time and queryable in a flash."],"kql":["KQL","Kusto Query Language for real-time and log data."],"echtzeit":["Real-Time Intelligence","Insight from events while they happen."],"aktivator":["Activator","Triggers actions as soon as data meets a condition."],"alert":["Alert","Notifies you as soon as a measure crosses a threshold."],"kennzahl":["Measure","A calculated value that shows how things are going."],"dax":["DAX","Formula language for measures in the semantic model."],"m":["M (Power Query)","The formula language behind Power Query and dataflows."],"beziehung":["Relationship","Connects tables through shared keys."],"rel11":["One-to-one relationship","Every record has exactly one partner on the other side (e.g. person ↔ ID card)."],"reln":["One-to-many relationship","One record, many partners (e.g. one customer, many orders) – the standard in a star schema."],"relnm":["Many-to-many relationship","Many to many (e.g. courses ↔ participants) – needs cross filtering or a bridge table."],"semmodell":["Semantic model","Tables, relationships and measures with business meaning."],"visual":["Visualization","Numbers you understand at a glance."],"bericht":["Report","Several visualizations that tell a story."],"powerbi":["Power BI","Business intelligence: see, share and understand data."],"directlake":["Direct Lake","Reports read Delta tables straight from OneLake – no import."],"dashboard":["Dashboard","Combines tiles from several Power BI reports on a single page."],"factory":["Data Factory","The Fabric experience for data integration and orchestration."],"pipeline":["Data pipeline","Orchestrates steps that move data from A to B."],"copyact":["Copy activity","The pipeline building block that copies data from source to destination."],"copyjob":["Copy job","Copies data into Fabric simply and quickly."],"verknuepfung":["Shortcut","Points to data in another location – without any copy."],"spiegelung":["Mirroring","Keeps a database mirrored in OneLake in near real time."],"sql":["T-SQL","The language in which SQL Server and warehouses answer."],"sqlendpunkt":["SQL analytics endpoint","Lets you query lakehouse tables with T-SQL."],"sprachen":["Notebook languages","Python, Scala, R and SQL: everything a Fabric notebook understands."],"spark":["Apache Spark","Distributed processing of huge amounts of data in the notebook."],"pyspark":["PySpark","Spark, driven with Python."],"python":["Python","The most popular notebook language for data, analysis and AI."],"scala":["Scala","The language Spark itself is written in."],"r":["R","Language for statistics and charts (SparkR in the notebook)."],"sparksql":["Spark SQL","SQL directly on lakehouse tables, executed by Spark."],"cluster":["Cluster","Many servers working together."],"sparkpool":["Spark pool","Prepared compute nodes for Spark jobs."],"parquet":["Parquet","Columnar, compressed file format for analytics."],"delta":["Delta table","Parquet plus a transaction log: reliable and versionable."],"timetravel":["Time travel","Query or restore earlier versions of a table."],"vorder":["V-Order","Fabric optimization for lightning-fast Parquet reads."],"bronze":["Bronze layer","Raw data, exactly as it lands in the lakehouse."],"silber":["Silver layer","Cleansed and validated data."],"gold":["Gold layer","Curated data, ready for reports."],"medallion":["Medallion architecture","Bronze, silver, gold: data matures layer by layer."],"dataeng":["Data Engineering","Transform data in the lakehouse with Spark."],"datamodelling":["Data modeling","Design tables, keys and relationships so that analysis becomes easy."],"ml":["Machine learning","Recognize patterns in data instead of programming them."],"mlmodell":["ML model","Learned knowledge that makes predictions."],"experiment":["Experiment","Compare training runs and choose the best one."],"datascience":["Data Science","Build, test and deploy models."],"copilot":["Copilot","An AI assistant that helps write code and text."],"copilotfab":["Copilot in Fabric","AI assistant in Fabric that co-writes code, queries and reports."],"agent":["Data agent","Answers questions about your data in natural language."],"semlink":["Semantic link","Connects notebooks with semantic models."],"berechtigung":["Permission","Who may do what in the workspace?"],"sicherheit":["Data security","Protects data from unauthorized access."],"onelakesec":["OneLake security","Access roles down to folder, table, row and column level directly in OneLake."],"rls":["Row-level security","Every person sees only the rows meant for them."],"katalog":["OneLake catalog","Where you find Fabric items and understand them."],"governance":["Governance","Rules and responsibility for how data is handled."],"purview":["Microsoft Purview","Governance and protection across the entire data estate."],"herkunft":["Data lineage","Where does the data come from, and where does it flow?"],"mandant":["Tenant","The organization and its entire Fabric environment."],"domaene":["Domain","Groups workspaces by business area."],"datamesh":["Data mesh","Decentralized data ownership in the business domains."],"skalierung":["Scaling","More (or less) compute as needed."],"sku":["F SKU","Fabric capacity size (F2 to F2048): determines how much compute you get."],"optimierung":["Optimization","Faster, cheaper, better."],"partition":["Partition","Large tables split into handy pieces."],"index":["Index","A table of contents that speeds up queries."],"synapse":["Azure Synapse","The predecessor analytics service whose ideas live on in Fabric."],"adls":["Azure Data Lake Storage","Cloud storage for huge amounts of files."],"s3":["Amazon S3","AWS object storage – usable directly in OneLake through a shortcut."],"databricks":["Databricks","Lakehouse platform based on Spark."],"snowflake":["Snowflake","A cloud data warehouse from another vendor."],"cosmos":["Cosmos DB","Globally distributed NoSQL database from Azure."],"azuresql":["Azure SQL","SQL Server as a managed cloud service."],"sap":["SAP","The enterprise software where many companies keep their core data."],"gitgen":["Git","Version control for code and files."],"github":["GitHub","Platform for sharing and managing Git repositories."],"azdevops":["Azure DevOps","Repos, boards and pipelines for development teams."],"gitint":["Git integration","Version control for workspaces."],"entwicklung":["DEV (development)","Where things are built and tried out."],"test":["Test","Checks that everything works as expected."],"produktion":["PROD (production)","The environment where users do their work."],"bereitstellung":["Deployment","Roll out content to a target environment."],"deploy":["Deployment pipeline","Moves content from development through test into production."],"monitoring":["Monitoring","Keep an eye on whether everything runs healthy."],"monhub":["Monitor hub","The central place in Fabric to monitor all activities."],"admin":["Admin","Manages, configures and protects the platform."],"adminportal":["Admin portal","The central management interface for Fabric settings."],"rest":["REST","Programming interfaces over ordinary web requests."],"api":["API","An interface through which programs talk to each other."],"restapi":["Fabric REST APIs","Control Fabric with code – also for Terraform and automation."],"cli":["CLI","Operation from the command line."],"fabcli":["Fabric CLI","Manage Fabric items from the command line."],"terraform":["Terraform","Infrastructure as code, also for Fabric resources."],"ingenieur":["Data engineer","Builds the pipelines that keep everything running."],"analyst":["Data analyst","Turns measures into decisions."],"team":["Data team","Engineers and analysts – unbeatable together."]}}};
+// Sprachneutral: alle Element-IDs mit ihrem Symbol. Neue Elemente müssen hier, in links.js und in jeder i18n-Datei eingetragen werden.
+const EMOJI = {
+  daten:"🗂️",
+  rechen:"⚡",
+  speicher:"💾",
+  netz:"🌐",
+  datensatz:"📄",
+  datensaetze:"🗒️",
+  server:"🖧",
+  onpremgw:"🚪",
+  cloudverb:"🔌",
+  cache:"⚙️",
+  skript:"📜",
+  datei:"📁",
+  excel:"🟩",
+  csv:"📑",
+  export:"📤",
+  uhr:"🕐",
+  bewegung:"🚚",
+  cloud:"☁️",
+  fabric:"🧵",
+  tabelle:"📋",
+  datenbank:"🛢️",
+  clouddb:"🫧",
+  sqlserver:"🗄️",
+  dataflow:"🧪",
+  dataflowgen1:"🧪",
+  notebook:"📓",
+  sekunde:"⏲️",
+  transformation:"🔀",
+  ereignis:"📣",
+  aktion:"🎬",
+  kopie:"🖨️",
+  abkuerzung:"↪️",
+  sensor:"🌡️",
+  iot:"🏷️",
+  batch:"🗓️",
+  orchestrierung:"🎼",
+  quelle:"📤",
+  ziel:"🏁",
+  etl:"🔄",
+  dqchecks:"✅",
+  lowcode:"🖱️",
+  analyse:"🔍",
+  logfiles:"📜",
+  abfrage:"❓",
+  suche:"🔎",
+  ki:"🪄",
+  kapazitaet:"🔋",
+  fabcap:"🔋🧵",
+  fuam:"🕵️‍♂️",
+  reservierung:"📅",
+  azure:"🔷",
+  adf:"🏭",
+  onelake:"🏞️",
+  arbeitsbereich:"🧑‍💻",
+  lakehouse:"🏠",
+  warehouse:"🏭",
+  datenstrom:"🌊",
+  eventstream:"⚡🌊",
+  eventhouse:"🏚️",
+  kql:"🕵️",
+  echtzeit:"⏱️",
+  aktivator:"🚨",
+  alert:"🔔",
+  kennzahl:"🎯",
+  dax:"🧮",
+  m:"Ⓜ️",
+  beziehung:"↔️",
+  rel11:"1️⃣",
+  reln:"🌳",
+  relnm:"🕸️",
+  semmodell:"🧠",
+  visual:"📈",
+  bericht:"📊",
+  powerbi:"🟡",
+  directlake:"🚀",
+  dashboard:"🖥️",
+  factory:"🏗️",
+  pipeline:"🚰",
+  copyact:"🔁",
+  copyjob:"📥",
+  verknuepfung:"🔗",
+  spiegelung:"🪞",
+  sql:"🧾",
+  sqlendpunkt:"🔌",
+  sprachen:"🔤",
+  spark:"🔥",
+  pyspark:"🔥🐍",
+  python:"🐍",
+  scala:"🪜",
+  r:"📐",
+  sparksql:"🔥🧾",
+  cluster:"🧩",
+  sparkpool:"🏊",
+  parquet:"🧱",
+  delta:"🔺",
+  timetravel:"⏪",
+  vorder:"✨",
+  bronze:"🥉",
+  silber:"🥈",
+  gold:"🥇",
+  medallion:"🏅",
+  dataeng:"🛠️",
+  datamodelling:"📐",
+  ml:"🤖",
+  mlmodell:"🎓",
+  experiment:"🧫",
+  datascience:"🔬",
+  copilot:"🧑‍✈️",
+  copilotfab:"🧑‍✈️🧵",
+  agent:"🕴️",
+  semlink:"⛓️",
+  berechtigung:"🔑",
+  sicherheit:"🛡️",
+  onelakesec:"🔐",
+  rls:"🧱🔐",
+  katalog:"📚",
+  governance:"⚖️",
+  purview:"👁️",
+  herkunft:"🧬",
+  mandant:"🏢",
+  domaene:"🗺️",
+  datamesh:"🕸️",
+  skalierung:"📏",
+  sku:"🎚️",
+  optimierung:"🎛️",
+  partition:"🍰",
+  index:"📑",
+  synapse:"🌀",
+  adls:"🪣",
+  s3:"🟠",
+  databricks:"🔶",
+  snowflake:"❄️",
+  cosmos:"🪐",
+  azuresql:"🔹",
+  sap:"💼",
+  gitgen:"🌳",
+  github:"🐙",
+  azdevops:"🔧",
+  gitint:"🌿",
+  entwicklung:"🧰",
+  test:"☑️",
+  produktion:"🟢",
+  bereitstellung:"📦",
+  deploy:"🚦",
+  monitoring:"🩺",
+  monhub:"📟",
+  admin:"🧑‍🔧",
+  adminportal:"🛂",
+  rest:"🌍",
+  api:"🔗",
+  restapi:"🧭",
+  cli:"⌨️",
+  fabcli:"💻",
+  terraform:"🌱",
+  ingenieur:"👷",
+  analyst:"🧑‍💼",
+  team:"🤝"
+};
+
+// Sprachneutral: Rezepte, Grundelemente und Ziel.
+// Element-IDs werden in elements.js definiert, ihre Namen stehen in src/i18n/<sprache>.js.
+// [Zutat A, Zutat B, Ergebnis, (optional) Zutaten, die erhalten bleiben]
+// Ein Ergebnis darf mehrere Rezepte haben, und ein Zutatenpaar darf mehrere Ergebnisse liefern.
+const RECIPES = [
+  // --- Grundlagen ---
+  ["daten","daten","datensatz"],["rechen","netz","server"],["speicher","rechen","cache"],
+  ["daten","rechen","skript"],["daten","speicher","datei"],["daten","netz","fabric"],
+  ["rechen","rechen","uhr"],["netz","netz","bewegung"],["speicher","netz","cloud"],
+  ["tabelle","speicher","datenbank"],["daten","server","sqlserver"],
+  ["fabric","skript","notebook"],
+  ["uhr","uhr","sekunde"],["skript","datensatz","transformation"],["datensatz","uhr","ereignis"],
+  ["skript","netz","aktion"],["datei","datei","kopie"],["cache","netz","abkuerzung"],
+  ["datensatz","rechen","sensor"],["sensor","netz","iot"],["uhr","datei","batch"],["skript","uhr","orchestrierung"],
+  ["datenbank","netz","quelle"],["datenbank","speicher","ziel"],["transformation","bewegung","etl"],
+  ["visual","skript","lowcode"],["tabelle","rechen","analyse"],["datenbank","rechen","abfrage"],
+  ["abfrage","datei","suche"],["ml","rechen","ki"],["cloud","rechen","kapazitaet"],["cloud","server","azure"],
+
+  // --- Fabric-Kern ---
+  ["fabric","speicher","onelake"],["datei","cloud","onelake"],
+  ["fabric","kapazitaet","fabcap"],["fabric","rechen","fabcap"],["fabric","server","arbeitsbereich"],
+  ["onelake","tabelle","lakehouse"],["daten","spark","lakehouse"],["spark","delta","lakehouse"],
+  ["delta","onelake","lakehouse"],["medallion","fabric","lakehouse"],
+  ["fabric","datenbank","warehouse"],["daten","sql","warehouse"],["sql","onelake","warehouse"],
+  ["datensatz","netz","datenstrom"],
+
+  // --- Echtzeit ---
+  ["fabric","datenstrom","eventstream"],["daten","ereignis","eventstream"],["ereignis","datenstrom","eventstream"],
+  ["datenstrom","onelake","eventstream"],["datenstrom","transformation","eventstream"],["ereignis","sensor","eventstream"],
+  ["eventstream","datenbank","eventhouse"],["ereignis","analyse","eventhouse"],["daten","kql","eventhouse"],["datenstrom","kql","eventhouse"],
+  ["eventstream","skript","kql"],
+  ["eventhouse","fabric","echtzeit"],["daten","uhr","echtzeit"],["iot","fabric","echtzeit"],
+  ["sensor","sekunde","echtzeit"],["datenstrom","uhr","echtzeit"],
+  ["tabelle","skript","kennzahl"],["eventstream","kennzahl","aktivator"],["ereignis","aktion","aktivator"],
+  ["aktivator","kennzahl","alert"],
+
+  // --- Power BI ---
+  ["kennzahl","skript","dax"],["dataflow","skript","m"],["tabelle","tabelle","beziehung"],
+  ["beziehung","kennzahl","semmodell"],["lakehouse","powerbi","semmodell"],["warehouse","powerbi","semmodell"],["daten","dax","semmodell"],
+  ["kennzahl","datensatz","visual"],["visual","visual","bericht"],
+  ["fabric","bericht","powerbi"],["semmodell","bericht","powerbi"],["daten","visual","powerbi"],
+  ["semmodell","lakehouse","directlake"],["onelake","powerbi","directlake"],["semmodell","onelake","directlake"],
+  ["bericht","bericht","dashboard"],
+
+  // --- Data Factory ---
+  ["fabric","dataflow","factory"],["daten","bewegung","factory"],["daten","pipeline","factory"],["etl","orchestrierung","factory"],
+  ["daten","transformation","dataflow"],["daten","m","dataflow"],["etl","lowcode","dataflow"],["transformation","lowcode","dataflow"],
+  ["batch","orchestrierung","pipeline"],["quelle","ziel","copyact"],["pipeline","datei","copyjob"],
+
+  // --- Verknüpfung & Spiegelung ---
+  ["onelake","datei","verknuepfung"],["daten","abkuerzung","verknuepfung"],["adls","onelake","verknuepfung"],
+  ["s3","onelake","verknuepfung"],["databricks","onelake","verknuepfung"],["snowflake","onelake","verknuepfung"],
+  ["sqlserver","onelake","spiegelung"],["sap","lakehouse","spiegelung"],["sqlserver","fabric","spiegelung"],
+  ["azuresql","fabric","spiegelung"],["cosmos","fabric","spiegelung"],["snowflake","fabric","spiegelung"],
+  ["datenbank","kopie","spiegelung"],
+  ["sqlserver","skript","sql"],["sql","lakehouse","sqlendpunkt"],
+
+  // --- Notebook & Spark ---
+  ["notebook","skript","sprachen"],["daten","python","notebook"],["daten","pyspark","notebook"],
+  ["notebook","server","spark"],["python","spark","pyspark"],["sprachen","datei","python"],["sprachen","server","scala"],
+  ["sprachen","kennzahl","r"],["spark","sql","sparksql"],["server","server","cluster"],["spark","cluster","sparkpool"],
+  ["datei","tabelle","parquet"],["parquet","lakehouse","delta"],["parquet","cache","vorder"],
+
+  // --- Medallion ---
+  ["lakehouse","datei","bronze"],["bronze","dataflow","silber"],["silber","notebook","gold"],["silber","dataflow","gold"],
+  ["bronze","gold","medallion"],["bronze","silber","medallion"],["silber","gold","medallion"],
+  ["spark","lakehouse","dataeng"],
+
+  // --- KI & Data Science ---
+  ["notebook","kennzahl","ml"],["ml","datensatz","mlmodell"],["ml","notebook","experiment"],
+  ["experiment","mlmodell","datascience"],["daten","notebook","datascience"],["daten","ki","datascience"],["ki","notebook","datascience"],
+  ["ki","skript","copilot"],["fabric","copilot","copilotfab"],["ki","fabric","copilotfab"],
+  ["copilotfab","semmodell","agent"],["notebook","semmodell","semlink"],
+
+  // --- Sicherheit & Governance ---
+  ["arbeitsbereich","datensatz","berechtigung"],["berechtigung","netz","sicherheit"],
+  ["berechtigung","datensatz","onelakesec"],["daten","sicherheit","onelakesec"],["berechtigung","onelake","onelakesec"],
+  ["onelake","datenbank","katalog"],["daten","governance","katalog"],["daten","suche","katalog"],
+  ["domaene","daten","katalog"],["suche","onelake","katalog"],["domaene","governance","katalog"],
+  ["sicherheit","katalog","governance"],["governance","fabric","purview"],["katalog","datenstrom","herkunft"],
+  ["fabric","sicherheit","mandant"],["mandant","arbeitsbereich","domaene"],["domaene","netz","datamesh"],
+
+  // --- Kapazität & Optimierung ---
+  ["cluster","rechen","skalierung"],["skalierung","kapazitaet","sku"],["skalierung","kennzahl","optimierung"],
+  ["delta","server","partition"],["tabelle","cache","index"],
+  ["azure","sqlserver","synapse"],["azure","datei","adls"],["speicher","cloud","s3"],["spark","cloud","databricks"],
+  ["datenbank","cloud","cosmos"],["azure","datenbank","azuresql"],["warehouse","cloud","snowflake"],["server","datenbank","sap"],
+
+  // --- Git, Deployment, Betrieb ---
+  ["skript","speicher","gitgen"],["gitgen","netz","github"],["azure","gitgen","azdevops"],
+  ["arbeitsbereich","skript","gitint"],["daten","gitgen","gitint"],["fabric","azdevops","gitint"],["fabric","github","gitint"],
+  ["skript","server","entwicklung"],["entwicklung","datensatz","test"],["test","cloud","produktion"],["skript","cloud","bereitstellung"],
+  ["gitint","pipeline","deploy"],["entwicklung","bereitstellung","deploy"],["entwicklung","test","deploy"],
+  ["test","produktion","deploy"],["entwicklung","produktion","deploy"],
+  ["kennzahl","uhr","monitoring"],["fabric","monitoring","monhub"],
+  ["berechtigung","server","admin"],["fabric","admin","adminportal"],
+  ["abfrage","netz","rest"],["fabric","rest","restapi"],["skript","azure","terraform"],["fabric","terraform","restapi"],
+  ["skript","datei","cli"],["fabric","cli","fabcli"],
+
+  // --- Weitere Wege ---
+  ["fabric","orchestrierung","pipeline"],["uhr","transformation","pipeline"],["uhr","notebook","pipeline"],["uhr","semmodell","pipeline"],
+  ["skript","datenbank","sql"],["rechen","datei","skript"],["datensatz","speicher","datei"],["netz","datei","bewegung"],
+  ["cloud","daten","fabric"],["datensatz","datei","tabelle"],["sql","server","sqlserver"],
+  ["server","speicher","cache"],["sensor","uhr","ereignis"],["skript","ereignis","aktion"],["datei","bewegung","kopie"],
+  ["sensor","cloud","iot"],["uhr","tabelle","batch"],["aktion","uhr","orchestrierung"],["datei","speicher","ziel"],
+  ["quelle","transformation","etl"],["dataflow","visual","lowcode"],["daten","kennzahl","analyse"],["mlmodell","rechen","ki"],
+  ["cluster","cloud","kapazitaet"],["tabelle","transformation","dataflow"],["fabric","transformation","dataflow"],["m","datensatz","transformation"],
+  ["dataflow","tabelle","transformation"],["dataflow","sprachen","m"],["fabric","berechtigung","arbeitsbereich"],["tabelle","sql","warehouse"],
+  ["fabric","sprachen","notebook"],["python","fabric","notebook"],["ereignis","ereignis","datenstrom"],["iot","datenstrom","eventstream"],
+  ["kql","datenbank","eventhouse"],["datenstrom","datenbank","eventhouse"],["abfrage","ereignis","kql"],["abfrage","datenstrom","kql"],
+  ["eventhouse","skript","kql"],["eventstream","analyse","echtzeit"],["ereignis","sekunde","echtzeit"],["eventstream","aktion","aktivator"],
+  ["datenstrom","aktion","aktivator"],["fabric","aktion","aktivator"],["kennzahl","aktion","alert"],["kennzahl","ereignis","alert"],
+  ["analyse","datensatz","kennzahl"],["dax","tabelle","kennzahl"],["semmodell","skript","dax"],["semmodell","tabelle","beziehung"],
+  ["dax","beziehung","semmodell"],["powerbi","tabelle","semmodell"],["analyse","kennzahl","visual"],["visual","semmodell","bericht"],
+  ["visual","kennzahl","bericht"],["fabric","visual","powerbi"],["semmodell","delta","directlake"],["powerbi","delta","directlake"],
+  ["bericht","powerbi","dashboard"],["visual","bericht","dashboard"],["fabric","pipeline","factory"],["pipeline","dataflow","factory"],
+  ["fabric","etl","factory"],["daten","orchestrierung","pipeline"],["orchestrierung","bewegung","pipeline"],["copyact","orchestrierung","pipeline"],
+  ["quelle","kopie","copyact"],["kopie","ziel","copyact"],["daten","kopie","copyact"],["pipeline","kopie","copyact"],
+  ["kopie","fabric","copyjob"],["copyact","fabric","copyjob"],["abkuerzung","onelake","verknuepfung"],["datei","abkuerzung","verknuepfung"],
+  ["kopie","sqlserver","spiegelung"],["kopie","onelake","spiegelung"],["sqlserver","sprachen","sql"],["abfrage","skript","sql"],
+  ["warehouse","skript","sql"],["sprachen","datenbank","sql"],["lakehouse","abfrage","sqlendpunkt"],["sql","delta","sqlendpunkt"],
+  ["spark","skript","sprachen"],["cluster","notebook","spark"],["skript","cluster","spark"],["python","sparkpool","pyspark"],
+  ["sprachen","analyse","python"],["spark","sprachen","scala"],["analyse","skript","r"],["sql","notebook","sparksql"],
+  ["sql","cluster","sparksql"],["server","netz","cluster"],["spark","kapazitaet","sparkpool"],["cluster","pyspark","sparkpool"],
+  ["datei","analyse","parquet"],["parquet","tabelle","delta"],["parquet","onelake","delta"],["parquet","optimierung","vorder"],
+  ["delta","optimierung","vorder"],["delta","cache","vorder"],["lakehouse","daten","bronze"],["lakehouse","kopie","bronze"],
+  ["bronze","transformation","silber"],["bronze","notebook","silber"],["bronze","skript","silber"],["bronze","spark","silber"],
+  ["silber","transformation","gold"],["silber","spark","gold"],["silber","analyse","gold"],["silber","skript","gold"],
+  ["gold","lakehouse","medallion"],["notebook","lakehouse","dataeng"],["pipeline","lakehouse","dataeng"],["spark","fabric","dataeng"],
+  ["analyse","notebook","ml"],["python","analyse","ml"],["experiment","datensatz","mlmodell"],["ml","tabelle","mlmodell"],
+  ["ki","datensatz","mlmodell"],["ml","daten","mlmodell"],["mlmodell","notebook","experiment"],["ml","skript","experiment"],
+  ["mlmodell","daten","datascience"],["ml","fabric","datascience"],["experiment","fabric","datascience"],["ki","sprachen","copilot"],
+  ["copilot","powerbi","copilotfab"],["copilot","arbeitsbereich","copilotfab"],["copilot","semmodell","agent"],["ki","semmodell","agent"],
+  ["ki","lakehouse","agent"],["copilotfab","lakehouse","agent"],["python","semmodell","semlink"],["sprachen","semmodell","semlink"],
+  ["notebook","powerbi","semlink"],["arbeitsbereich","sicherheit","berechtigung"],["berechtigung","daten","sicherheit"],["admin","netz","sicherheit"],
+  ["sicherheit","onelake","onelakesec"],["sicherheit","lakehouse","onelakesec"],["suche","fabric","katalog"],["governance","onelake","katalog"],
+  ["sicherheit","herkunft","governance"],["katalog","admin","governance"],["domaene","sicherheit","governance"],["governance","katalog","purview"],
+  ["governance","herkunft","purview"],["katalog","herkunft","purview"],["katalog","pipeline","herkunft"],["katalog","daten","herkunft"],
+  ["admin","cloud","mandant"],["azure","sicherheit","mandant"],["arbeitsbereich","governance","domaene"],
+  ["arbeitsbereich","arbeitsbereich","domaene"],["domaene","domaene","datamesh"],["cluster","server","skalierung"],["kapazitaet","cluster","skalierung"],
+  ["skalierung","fabcap","sku"],["index","abfrage","optimierung"],["analyse","cache","optimierung"],
+  ["tabelle","cluster","partition"],["tabelle","suche","index"],["tabelle","abfrage","index"],["azure","warehouse","synapse"],
+  ["azure","analyse","synapse"],["azure","speicher","adls"],["azure","spark","databricks"],["notebook","cloud","databricks"],
+  ["azure","sql","azuresql"],["cloud","sqlserver","azuresql"],["skript","kopie","gitgen"],["gitgen","cloud","github"],
+  ["gitgen","pipeline","azdevops"],["gitgen","deploy","azdevops"],["arbeitsbereich","gitgen","gitint"],["arbeitsbereich","github","gitint"],
+  ["arbeitsbereich","azdevops","gitint"],["fabric","gitgen","gitint"],["notebook","arbeitsbereich","entwicklung"],["gitgen","skript","entwicklung"],
+  ["entwicklung","tabelle","test"],["entwicklung","kennzahl","test"],["test","server","produktion"],["test","arbeitsbereich","produktion"],
+  ["entwicklung","cloud","bereitstellung"],["kopie","cloud","bereitstellung"],["bereitstellung","pipeline","deploy"],["bereitstellung","arbeitsbereich","deploy"],
+  ["pipeline","test","deploy"],["bereitstellung","fabric","deploy"],["dashboard","uhr","monitoring"],["analyse","uhr","monitoring"],
+  ["dashboard","kennzahl","monitoring"],["monitoring","arbeitsbereich","monhub"],["monitoring","pipeline","monhub"],["mandant","berechtigung","admin"],
+  ["mandant","sicherheit","admin"],["admin","mandant","adminportal"],["admin","fabcap","adminportal"],["abfrage","server","rest"],
+  ["abfrage","cloud","rest"],["rest","arbeitsbereich","restapi"],["terraform","arbeitsbereich","restapi"],["aktion","server","cli"],
+  ["cli","arbeitsbereich","fabcli"],["cli","onelake","fabcli"],["cli","restapi","fabcli"],["bereitstellung","azure","terraform"],
+  ["cli","azure","terraform"],["dataeng","fabric","ingenieur"],["dataeng","pipeline","ingenieur"],["spark","pipeline","ingenieur"],
+  ["pipeline","sprachen","ingenieur"],["powerbi","kennzahl","analyst"],["bericht","analyse","analyst"],["powerbi","analyse","analyst"],
+  ["ingenieur","datascience","team"],["analyst","datascience","team"],
+
+  // --- Datensätze & Beziehungstypen ---
+  ["datensatz","datensatz","datensaetze"],["datensatz","datensatz","rel11"],
+  ["datensatz","datensaetze","reln"],["datensaetze","datensaetze","relnm"],["datensaetze","datensaetze","tabelle"],["datensaetze","daten","tabelle"],
+  ["datensaetze","datei","tabelle"],
+  ["rel11","reln","beziehung"],["reln","relnm","beziehung"],["rel11","relnm","beziehung"],
+  ["reln","kennzahl","semmodell"],
+
+  // --- Weitere Kombinationen ---
+  ["ziel","test","entwicklung"],["ziel","entwicklung","produktion"],["ziel","daten","fabric"],
+  ["server","tabelle","datenbank"],["cloud","tabelle","clouddb"],["datenbank","cloud","clouddb"],
+  ["clouddb","sqlserver","azuresql"],["clouddb","azure","azuresql"],
+  ["bereitstellung","quelle","api"],["api","netz","rest"],["api","abfrage","rest"],["fabric","api","restapi"],
+  ["datensatz","copyact","datensatz",["copyact"]],["datensatz","copyact","kopie",["copyact"]],
+  ["datenbank","datei","lakehouse"],["s3","quelle","spiegelung"],["quelle","fabric","spiegelung"],["quelle","onelake","verknuepfung"],
+  ["azure","transformation","adf"],["adf","fabric","factory"],["adf","pipeline","factory"],
+  ["fabric","datei","onelake"],["adls","fabric","verknuepfung"],
+
+  // --- Kombinationen mit mehreren Ergebnissen ---
+  ["datei","netz","quelle"],["cloud","cluster","azure"],["tabelle","dax","semmodell"],["daten","kennzahl","visual"],
+  ["parquet","onelake","lakehouse"],["ki","daten","ml"],["dashboard","kennzahl","analyst"],
+
+  // --- Weitere Kombinationen (Runde 3) ---
+  ["delta","uhr","timetravel"],["notebook","datensaetze","etl"],["notebook","datensaetze","dqchecks"],
+  ["fabcap","uhr","reservierung"],["pipeline","datensaetze","etl"],["server","fabric","onpremgw"],["cloud","fabric","cloudverb"],
+  ["analyse","skript","python"],["fabcap","analyse","fuam"],["warehouse","datei","parquet"],["sap","onelake","spiegelung"],
+  ["deploy","entwicklung","test"],["datensaetze","cache","dataflowgen1"],["dataflowgen1","fabric","dataflow"],
+  ["dataeng","tabelle","datamodelling"],["analyse","datenbank","logfiles"],["sicherheit","powerbi","rls"],
+  ["abfrage","datei","excel"],["abfrage","datei","csv"],["excel","powerbi","export"],["csv","powerbi","export"],
+  ["csv","fabric","onelake"],["excel","fabric","onelake"],
+
+  // --- Team ---
+  ["notebook","pipeline","ingenieur"],["bericht","kennzahl","analyst"],["ingenieur","analyst","team"]
+];
+const BASE = ["daten","rechen","speicher","netz"];
+const GOAL = "team";
+
+// Sprachneutral: Learn-Pfade ohne Sprachkürzel (das Sprachkürzel kommt aus src/i18n/<sprache>.js → learn).
+// id: [Learn-Pfad (null = kein Link), direkte Video-URL (null = kein Video)]
+const LINKS = {
+  daten:["/azure/architecture/data-guide/",null], rechen:["/azure/architecture/guide/technology-choices/compute-decision-tree",null],
+  speicher:["/azure/storage/common/storage-introduction",null], netz:["/azure/networking/fundamentals/networking-overview",null],
+  datensatz:[null,null], server:[null,null], cache:["/azure/architecture/best-practices/caching",null],
+  skript:[null,null], datei:[null,null], uhr:[null,null], bewegung:[null,null], sekunde:[null,null],
+  transformation:[null,null], ereignis:[null,null], aktion:[null,null], kopie:[null,null], abkuerzung:[null,null],
+  sensor:[null,null], iot:["/azure/iot/iot-introduction",null], batch:[null,null], orchestrierung:[null,null],
+  quelle:[null,null], ziel:[null,null], etl:["/azure/architecture/data-guide/relational-data/etl",null],
+  lowcode:[null,null], analyse:[null,null], abfrage:[null,null], suche:[null,null],
+  ki:["/azure/architecture/ai-ml/",null], kapazitaet:["/fabric/enterprise/licenses",null],
+  fabcap:["/fabric/enterprise/licenses",null],
+  fabric:["/fabric/get-started/microsoft-fabric-overview",null],
+  tabelle:["/sql/relational-databases/tables/tables",null], datenbank:["/sql/relational-databases/databases/databases",null],
+  sqlserver:["/sql/sql-server/what-is-sql-server",null],
+  dataflow:["/fabric/data-factory/dataflows-gen2-overview",null],
+  notebook:["/fabric/data-engineering/how-to-use-notebook",null],
+  onelake:["/fabric/onelake/onelake-overview",null],
+  arbeitsbereich:["/fabric/fundamentals/workspaces",null],
+  lakehouse:["/fabric/data-engineering/lakehouse-overview",null],
+  warehouse:["/fabric/data-warehouse/data-warehousing",null],
+  datenstrom:["/azure/stream-analytics/stream-analytics-introduction",null],
+  eventstream:["/fabric/real-time-intelligence/event-streams/overview",null],
+  eventhouse:["/fabric/real-time-intelligence/eventhouse",null],
+  kql:["/kusto/query/",null], echtzeit:["/fabric/real-time-intelligence/overview",null],
+  aktivator:["/fabric/real-time-intelligence/data-activator/activator-introduction",null],
+  alert:["/power-bi/create-reports/service-set-data-alerts",null],
+  kennzahl:["/power-bi/transform-model/desktop-measures",null], dax:["/dax/dax-overview",null],
+  m:["/powerquery-m/",null],
+  beziehung:["/power-bi/transform-model/desktop-create-and-manage-relationships",null],
+  semmodell:["/power-bi/connect-data/service-datasets-understand",null],
+  visual:["/power-bi/visuals/power-bi-visualization-types-for-reports-and-q-and-a",null],
+  bericht:["/power-bi/create-reports/",null], powerbi:["/power-bi/fundamentals/power-bi-overview",null],
+  directlake:["/fabric/fundamentals/direct-lake-overview",null],
+  dashboard:["/power-bi/create-reports/service-dashboards",null],
+  factory:["/fabric/data-factory/data-factory-overview",null],
+  pipeline:["/fabric/data-factory/pipeline-overview",null],
+  copyact:["/fabric/data-factory/copy-data-activity",null],
+  copyjob:["/fabric/data-factory/what-is-copy-job",null],
+  verknuepfung:["/fabric/onelake/onelake-shortcuts",null], spiegelung:["/fabric/mirroring/overview",null],
+  sql:["/sql/t-sql/language-reference",null],
+  sqlendpunkt:["/fabric/data-warehouse/get-started-lakehouse-sql-analytics-endpoint",null],
+  sprachen:["/fabric/data-engineering/how-to-use-notebook",null],
+  spark:["/fabric/data-engineering/spark-compute",null],
+  pyspark:["/fabric/data-engineering/how-to-use-notebook",null],
+  python:["/fabric/data-engineering/using-python-experience-on-notebook",null],
+  scala:["/fabric/data-engineering/how-to-use-notebook",null],
+  r:["/fabric/data-science/r-overview",null],
+  sparksql:["/fabric/data-engineering/how-to-use-notebook",null],
+  cluster:["/fabric/data-engineering/spark-compute",null],
+  sparkpool:["/fabric/data-engineering/create-custom-spark-pools",null],
+  parquet:["/fabric/data-engineering/lakehouse-and-delta-tables",null], delta:["/fabric/data-engineering/lakehouse-and-delta-tables",null],
+  vorder:["/fabric/data-engineering/delta-optimization-and-v-order",null],
+  bronze:["/fabric/onelake/onelake-medallion-lakehouse-architecture",null],
+  silber:["/fabric/onelake/onelake-medallion-lakehouse-architecture",null],
+  gold:["/fabric/onelake/onelake-medallion-lakehouse-architecture",null],
+  medallion:["/fabric/onelake/onelake-medallion-lakehouse-architecture",null],
+  dataeng:["/fabric/data-engineering/data-engineering-overview",null],
+  ml:["/fabric/data-science/machine-learning-model",null],
+  mlmodell:["/fabric/data-science/machine-learning-model",null],
+  experiment:["/fabric/data-science/machine-learning-experiment",null],
+  datascience:["/fabric/data-science/data-science-overview",null],
+  copilot:[null,null],
+  copilotfab:["/fabric/fundamentals/copilot-fabric-overview",null],
+  agent:["/fabric/data-science/concept-data-agent",null],
+  semlink:["/fabric/data-science/semantic-link-overview",null],
+  berechtigung:["/fabric/fundamentals/roles-workspaces",null],
+  onelakesec:["/fabric/onelake/security/get-started-security",null],
+  sicherheit:["/fabric/security/security-overview",null],
+  katalog:["/fabric/governance/onelake-catalog-overview",null],
+  governance:["/fabric/governance/governance-compliance-overview",null],
+  purview:["/fabric/governance/microsoft-purview-fabric",null],
+  herkunft:["/fabric/governance/lineage",null], mandant:["/fabric/admin/admin-overview",null],
+  domaene:["/fabric/governance/domains",null], datamesh:[null,null],
+  skalierung:["/fabric/enterprise/scale-capacity",null], sku:["/fabric/enterprise/buy-subscription",null],
+  optimierung:["/fabric/data-engineering/spark-best-practices-overview",null],
+  partition:["/fabric/data-engineering/lakehouse-and-delta-tables",null], index:["/sql/relational-databases/indexes/indexes",null],
+  cloud:[null,null], azure:["/azure/",null], synapse:["/azure/synapse-analytics/overview-what-is",null],
+  adls:["/azure/storage/blobs/data-lake-storage-introduction",null],
+  s3:["/fabric/onelake/create-s3-shortcut",null],
+  databricks:["/fabric/onelake/onelake-azure-databricks",null],
+  snowflake:["/fabric/mirroring/snowflake",null],
+  cosmos:["/fabric/mirroring/azure-cosmos-db",null],
+  azuresql:["/fabric/mirroring/azure-sql-database",null],
+  sap:["/fabric/mirroring/sap",null],
+  gitgen:["/devops/develop/git/what-is-git",null], github:[null,null],
+  azdevops:["/azure/devops/user-guide/what-is-azure-devops",null],
+  gitint:["/fabric/cicd/git-integration/intro-to-git-integration",null],
+  entwicklung:[null,null], test:[null,null], produktion:[null,null], bereitstellung:[null,null],
+  deploy:["/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines",null],
+  monitoring:[null,null], monhub:["/fabric/admin/monitoring-hub",null],
+  admin:[null,null], adminportal:["/fabric/admin/admin-center",null],
+  rest:[null,null], restapi:["/rest/api/fabric/articles/",null],
+  cli:[null,null], fabcli:[null,null], terraform:["/azure/developer/terraform/overview",null],
+  ingenieur:["/fabric/data-engineering/data-engineering-overview",null],
+  analyst:[null,null], team:[null,null],
+  datensaetze:[null,null], clouddb:[null,null], api:[null,null],
+  rel11:["/power-bi/transform-model/desktop-create-and-manage-relationships",null],
+  reln:["/power-bi/transform-model/desktop-create-and-manage-relationships",null],
+  relnm:["/power-bi/transform-model/desktop-many-to-many-relationships",null],
+  adf:["/azure/data-factory/introduction",null],
+  timetravel:["/fabric/data-warehouse/time-travel",null], dataflowgen1:["/fabric/data-factory/dataflows-gen2-overview",null], dqchecks:[null,null],
+  reservierung:["/azure/cost-management-billing/reservations/fabric-capacity",null],
+  onpremgw:["/data-integration/gateway/service-gateway-onprem",null],
+  cloudverb:["/fabric/data-factory/data-source-management",null], fuam:[null,null],
+  datamodelling:["/power-bi/guidance/star-schema",null], logfiles:[null,null],
+  rls:["/fabric/security/service-admin-row-level-security",null],
+  excel:["/power-bi/connect-data/service-excel-workbook-files",null], csv:[null,null],
+  export:["/power-bi/visuals/power-bi-visualization-export-data",null]
+};
+
+// Spiel-Logik. Sprachneutral: alle Texte kommen aus I18N (src/i18n/<sprache>.js),
+// alle Elemente aus EMOJI (src/data/elements.js), Rezepte aus RECIPES, Links aus LINKS.
+(function(){
+  const KEY = "fabric-alchemie-v2";
+  const $ = s => document.querySelector(s);
+  const ws = $("#ws"), list = $("#list"), side = $("#side");
+
+  // --- Sprache ---
+  // I18N_ALL enthält alle Sprachen (vom Build erzeugt). Gewählt wird: ?lang=… in der Adresse,
+  // sonst die zuletzt gewählte Sprache, sonst die Browsersprache, sonst Deutsch.
+  const LANG_KEY = "fabric-alchemie-lang";
+  const langCodes = Object.keys(I18N_ALL);
+  const langSel = $("#langSel");
+  let I18N, ELEMENTS = {};   // aktuelle Sprache; ELEMENTS: ID → [Name, Symbol, Beschreibung]
+
+  const T = (key, vars) => (I18N.ui[key] ?? key).replace(/\{(\w+)\}/g, (m, k) => vars && k in vars ? vars[k] : m);
+
+  function pickLang(){
+    let c = null;
+    try{ c = new URLSearchParams(location.search).get("lang"); }catch(e){}
+    if(!langCodes.includes(c)){ try{ c = localStorage.getItem(LANG_KEY); }catch(e){} }
+    if(!langCodes.includes(c)) c = (navigator.language || "").slice(0, 2).toLowerCase();
+    return langCodes.includes(c) ? c : (langCodes.includes("de") ? "de" : langCodes[0]);
+  }
+
+  function setLang(code, persist){
+    I18N = I18N_ALL[code];
+    ELEMENTS = {};
+    Object.keys(EMOJI).forEach(id => { const [name, desc] = I18N.elements[id]; ELEMENTS[id] = [name, EMOJI[id], desc]; });
+    document.documentElement.lang = I18N.lang;
+    document.title = I18N.ui.title;
+    document.querySelectorAll("[data-i18n]").forEach(n => n.textContent = T(n.dataset.i18n));
+    document.querySelectorAll("[data-i18n-html]").forEach(n => n.innerHTML = T(n.dataset.i18nHtml));
+    document.querySelectorAll("[data-i18n-title]").forEach(n => n.title = T(n.dataset.i18nTitle));
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(n => n.placeholder = T(n.dataset.i18nPlaceholder));
+    langSel.value = code;
+    if(persist){ try{ localStorage.setItem(LANG_KEY, code); }catch(e){} }
+  }
+
+  langCodes.forEach(c => { const o = document.createElement("option"); o.value = c; o.textContent = I18N_ALL[c].name || c; langSel.appendChild(o); });
+  langSel.addEventListener("change", () => {
+    setLang(langSel.value, true);
+    hideTip(); $("#toast").classList.remove("show");
+    renderList();
+    ws.querySelectorAll(".item").forEach(n => { n.innerHTML = chipHTML(n.dataset.id); });
+  });
+
+  // Ein Zutatenpaar kann mehrere Ergebnisse haben; ein optionales 4. Feld nennt Zutaten, die erhalten bleiben.
+  const recipeMap = new Map();
+  RECIPES.forEach(([a,b,c,keep]) => {
+    const k = [a,b].sort().join("|");
+    const r = recipeMap.get(k) || {res:[], keep:new Set()};
+    if(!r.res.includes(c)) r.res.push(c);
+    (keep || []).forEach(x => r.keep.add(x));
+    recipeMap.set(k, r);
+  });
+  const total = Object.keys(EMOJI).length;
+
+  let found = [...BASE];
+  let fresh = new Set();
+  let won = false;
+
+  function load(){
+    try{
+      const s = JSON.parse(localStorage.getItem(KEY));
+      if(s && Array.isArray(s.found)){
+        found = [...new Set([...BASE, ...s.found.filter(id => ELEMENTS[id])])];
+        won = !!s.won;
+      }
+    }catch(e){}
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify({found, won})); }catch(e){}
+  }
+
+  /* ---------- Sidebar ---------- */
+  function chipHTML(id){ const [n,e] = ELEMENTS[id]; return `<span class="e">${e}</span><span>${n}</span>`; }
+
+  function renderList(){
+    const q = $("#search").value.trim().toLowerCase();
+    list.innerHTML = "";
+    found.forEach(id => {
+      const name = ELEMENTS[id][0];
+      if(q && !name.toLowerCase().includes(q)) return;
+      const c = document.createElement("div");
+      c.className = "chip" + (BASE.includes(id) ? " base" : "") + (fresh.has(id) ? " fresh" : "");
+      c.dataset.id = id; c.innerHTML = chipHTML(id);
+      c.addEventListener("pointerdown", ev => startDrag(ev, id, null));
+      list.appendChild(c);
+    });
+    $("#bar").style.width = (found.length/total*100) + "%";
+    $("#count").textContent = T("count", {n: found.length, total});
+  }
+
+  /* ---------- Arbeitsfläche ---------- */
+  function updateEmpty(){ $("#empty").style.display = ws.querySelectorAll(".item").length ? "none" : "flex"; }
+
+  function makeItem(id, x, y){
+    const it = document.createElement("div");
+    it.className = "item" + (BASE.includes(id) ? " base" : "");
+    it.dataset.id = id; it.innerHTML = chipHTML(id); attachTip(it, id);
+    it.style.left = x + "px"; it.style.top = y + "px";
+    it.addEventListener("pointerdown", ev => startDrag(ev, id, it));
+    it.addEventListener("dblclick", () => {
+      const r = it.getBoundingClientRect(), w = ws.getBoundingClientRect();
+      makeItem(id, r.left - w.left + r.width/2 + 24, r.top - w.top + r.height/2 + 24);
+    });
+    ws.appendChild(it);
+    updateEmpty();
+    return it;
+  }
+
+  /* ---------- Drag & Drop ---------- */
+  let drag = null;
+
+  function startDrag(ev, id, existing){
+    if(ev.button !== undefined && ev.button !== 0) return;
+    ev.preventDefault();
+    const w = ws.getBoundingClientRect();
+    let el = existing;
+    if(!el) el = makeItem(id, ev.clientX - w.left, ev.clientY - w.top);
+    el.classList.add("drag");
+    el.style.zIndex = 50;
+    const r = el.getBoundingClientRect();
+    hideTip();
+    drag = {
+      id, el, target: null, sx: ev.clientX, sy: ev.clientY, moved: false, touch: ev.pointerType !== "mouse",
+      dx: existing ? (r.left + r.width/2) - ev.clientX : 0,
+      dy: existing ? (r.top + r.height/2) - ev.clientY : 0
+    };
+    moveDrag(ev);
+  }
+
+  function centerOf(el){ const r = el.getBoundingClientRect(); return {x:r.left+r.width/2, y:r.top+r.height/2, r}; }
+
+  function findTarget(el){
+    const a = centerOf(el);
+    let best = null, bd = 1e9;
+    ws.querySelectorAll(".item").forEach(o => {
+      if(o === el) return;
+      const b = centerOf(o);
+      const overlap = a.r.left < b.r.right && a.r.right > b.r.left && a.r.top < b.r.bottom && a.r.bottom > b.r.top;
+      const d = Math.hypot(a.x-b.x, a.y-b.y);
+      if(overlap && d < bd){ bd = d; best = o; }
+    });
+    return best;
+  }
+
+  function overSide(ev){
+    const r = side.getBoundingClientRect();
+    return ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom;
+  }
+
+  function moveDrag(ev){
+    if(!drag) return;
+    if(Math.hypot(ev.clientX - drag.sx, ev.clientY - drag.sy) > 6) drag.moved = true;
+    const w = ws.getBoundingClientRect();
+    drag.el.style.left = (ev.clientX + drag.dx - w.left) + "px";
+    drag.el.style.top  = (ev.clientY + drag.dy - w.top) + "px";
+    const t = findTarget(drag.el);
+    if(t !== drag.target){
+      if(drag.target) drag.target.classList.remove("target");
+      if(t) t.classList.add("target");
+      drag.target = t;
+    }
+    side.classList.toggle("trash", overSide(ev));
+  }
+
+  function endDrag(ev){
+    if(!drag) return;
+    const {el, target, id, moved, touch} = drag;
+    drag = null;
+    side.classList.remove("trash");
+    el.classList.remove("drag"); el.style.zIndex = "";
+    if(target) target.classList.remove("target");
+
+    if(overSide(ev)){ el.remove(); updateEmpty(); return; }
+    if(touch && !moved && !target) setTimeout(() => { if(el.isConnected) showTip(el, id); }, 0);
+
+    // in die Fläche zurückholen
+    const w = ws.getBoundingClientRect();
+    let x = parseFloat(el.style.left), y = parseFloat(el.style.top);
+    x = Math.max(40, Math.min(w.width-40, x));
+    y = Math.max(24, Math.min(w.height-24, y));
+    el.style.left = x + "px"; el.style.top = y + "px";
+
+    if(target){
+      const rec = recipeMap.get([id, target.dataset.id].sort().join("|"));
+      if(rec){
+        const a = centerOf(el), b = centerOf(target), ww = ws.getBoundingClientRect();
+        const mx = (a.x+b.x)/2 - ww.left, my = (a.y+b.y)/2 - ww.top;
+        // Zutaten entfernen – außer denen, die erhalten bleiben (dann zur Seite rücken)
+        [[el, id, a.x - b.x], [target, target.dataset.id, b.x - a.x]].forEach(([node, nid, dx]) => {
+          if(rec.keep.has(nid)){ node.style.left = (parseFloat(node.style.left) + (dx >= 0 ? 1 : -1) * 120) + "px"; }
+          else node.remove();
+        });
+        const n = rec.res.length, nodes = [];
+        rec.res.forEach((rid, i) => nodes.push(makeItem(rid, mx + (i - (n-1)/2) * 120, my + (rec.keep.size ? 60 : 0))));
+        discoverAll(rec.res, nodes);
+      } else {
+        // keine Reaktion: leicht auseinanderschieben
+        [el, target].forEach(n => { n.classList.remove("shake"); void n.offsetWidth; n.classList.add("shake"); });
+        const dx = parseFloat(el.style.left) - parseFloat(target.style.left) || 1;
+        el.style.left = (parseFloat(el.style.left) + Math.sign(dx)*70) + "px";
+        toast("info", T("noReaction", {a: ELEMENTS[id][0], b: ELEMENTS[target.dataset.id][0]}));
+      }
+    }
+  }
+
+  document.addEventListener("pointermove", moveDrag);
+  document.addEventListener("pointerup", endDrag);
+  document.addEventListener("pointercancel", endDrag);
+
+  /* ---------- Entdeckungen ---------- */
+  function discoverAll(ids, nodes){
+    const fresh_ = [];
+    ids.forEach((id, i) => {
+      if(nodes[i]) nodes[i].classList.add("glow");
+      if(!found.includes(id)){ found.push(id); fresh.add(id); fresh_.push(id); }
+    });
+    if(!fresh_.length) return;
+    save(); renderList();
+    toast("", fresh_.map(id => { const [name, emoji, desc] = ELEMENTS[id]; return T("newFound", {emoji, name, desc}); }).join("<br><br>"));
+    const chip = list.querySelector(`.chip[data-id="${fresh_[0]}"]`);
+    if(chip) chip.scrollIntoView({block:"nearest"});
+    if(fresh_.includes(GOAL) && !won){
+      won = true; save();
+      $("#winText").textContent = T("winText", {n: found.length, total}) + (found.length < total ? T("winMissing") : "");
+      $("#win").classList.add("show");
+    }
+  }
+
+  let toastTimer;
+  function toast(cls, html){
+    const t = $("#toast");
+    t.className = cls || "";
+    t.innerHTML = html;
+    void t.offsetWidth;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
+  }
+
+  // "neu"-Markierung entfernen, sobald das Element benutzt wird
+  list.addEventListener("pointerdown", ev => {
+    const c = ev.target.closest(".chip");
+    if(c && fresh.delete(c.dataset.id)) c.classList.remove("fresh");
+  });
+
+  /* ---------- Info-Karte mit Links ---------- */
+  const tip = $("#tip"); let tipTimer;
+  const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+  function tipHTML(id){
+    const [name, emoji, desc] = ELEMENTS[id];
+    const [path, video] = LINKS[id] || [null, null];
+    let s = `<div class="h">${emoji} ${esc(name)}</div><div class="d">${esc(desc)}</div>`;
+    if(path) s += `<a href="${I18N.learn}${path}" target="_blank" rel="noopener">${T("learnLink")}</a>`;
+    if(video) s += `<a href="${video}" target="_blank" rel="noopener">${T("videoLink")}</a>`;
+    return s;
+  }
+  function showTip(el, id){
+    clearTimeout(tipTimer);
+    tip.innerHTML = tipHTML(id);
+    tip.style.display = "block";
+    const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width/2 - w/2));
+    let y = r.top - h - 6; if(y < 8) y = r.bottom + 6;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip(){ clearTimeout(tipTimer); tip.style.display = "none"; }
+  function hideTipSoon(){ clearTimeout(tipTimer); tipTimer = setTimeout(hideTip, 250); }
+  function attachTip(el, id){
+    el.addEventListener("pointerenter", e => { if(e.pointerType === "mouse" && !drag) showTip(el, id); });
+    el.addEventListener("pointerleave", e => { if(e.pointerType === "mouse") hideTipSoon(); });
+  }
+  tip.addEventListener("pointerenter", () => clearTimeout(tipTimer));
+  tip.addEventListener("pointerleave", hideTipSoon);
+  document.addEventListener("pointerdown", e => { if(!tip.contains(e.target)) hideTip(); }, true);
+
+  /* ---------- Buttons ---------- */
+  $("#search").addEventListener("input", renderList);
+  $("#clearBtn").addEventListener("click", () => { ws.querySelectorAll(".item").forEach(n => n.remove()); updateEmpty(); });
+  $("#resetBtn").addEventListener("click", () => {
+    if(!confirm(T("resetConfirm"))) return;
+    found = [...BASE]; fresh.clear(); won = false; save();
+    ws.querySelectorAll(".item").forEach(n => n.remove()); updateEmpty(); renderList();
+  });
+  $("#winClose").addEventListener("click", () => $("#win").classList.remove("show"));
+  $("#hintBtn").addEventListener("click", () => {
+    const open = RECIPES.filter(([a,b,c]) => found.includes(a) && found.includes(b) && !found.includes(c));
+    if(!open.length){
+      toast("info", found.length >= total ? T("allFound") : T("noHint"));
+      return;
+    }
+    const [a,b] = open[Math.floor(Math.random()*open.length)];
+    toast("info", T("hintMsg", {a: ELEMENTS[a][0], b: ELEMENTS[b][0]}));
+    [a,b].forEach(id => {
+      const c = list.querySelector(`.chip[data-id="${id}"]`);
+      if(c){ c.classList.add("hint"); setTimeout(() => c.classList.remove("hint"), 3000); }
+    });
+  });
+
+  setLang(pickLang(), false);
+  load(); renderList(); updateEmpty();
+})();
+
+</script>
+</body>
+</html>

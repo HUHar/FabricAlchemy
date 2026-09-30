@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+{{STYLE}}
+</style>
+</head>
+<body>
+<header>
+  <h1><span data-i18n="titleA"></span> <span class="accent" data-i18n="titleB"></span></h1>
+  <div class="progress">
+    <div class="bar"><i id="bar"></i></div>
+    <div class="count" id="count"></div>
+  </div>
+  <div class="btns">
+    <select id="langSel" aria-label="Language"></select>
+    <button id="hintBtn" data-i18n="hint" data-i18n-title="hintTitle"></button>
+    <button id="clearBtn" data-i18n="clear"></button>
+    <button id="resetBtn" data-i18n="reset"></button>
+  </div>
+</header>
+<main>
+  <div id="ws"><div id="empty" data-i18n-html="empty"></div></div>
+  <aside id="side">
+    <div class="top"><input id="search" type="search" data-i18n-placeholder="search" autocomplete="off"></div>
+    <div id="list"></div>
+  </aside>
+</main>
+<div id="tip"></div>
+<div id="toast"></div>
+<div id="win"><div>
+  <h2 data-i18n="winTitle"></h2>
+  <p id="winText"></p>
+  <button id="winClose" data-i18n="winClose"></button>
+</div></div>
+
+<script>
+{{SCRIPTS}}
+</script>
+</body>
+</html>
