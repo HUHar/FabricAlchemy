@@ -87,7 +87,7 @@ const RECIPES = [
   ["datenbank","cloud","cosmos"],["azure","datenbank","azuresql"],["warehouse","cloud","snowflake"],["server","datenbank","sap"],
 
   // --- Git, Deployment, Betrieb ---
-  ["skript","speicher","gitgen"],["gitgen","netz","github"],["azure","gitgen","azdevops"],
+  ["skript","speicher","gitgen"],["gitgen","netz","github"],["aktion","github","ghactions"],["azure","gitgen","azdevops"],
   ["arbeitsbereich","skript","gitint"],["daten","gitgen","gitint"],["fabric","azdevops","gitint"],["fabric","github","gitint"],
   ["skript","server","entwicklung"],["entwicklung","datensatz","test"],["test","cloud","produktion"],["skript","cloud","bereitstellung"],
   ["gitint","pipeline","deploy"],["entwicklung","bereitstellung","deploy"],["entwicklung","test","deploy"],

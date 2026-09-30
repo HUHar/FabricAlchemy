@@ -85,6 +85,7 @@ const LINKS = {
   azuresql:["/fabric/mirroring/azure-sql-database",null],
   sap:["/fabric/mirroring/sap",null],
   gitgen:["/devops/develop/git/what-is-git",null], github:[null,null],
+  ghactions:["/azure/developer/github/github-actions",null],
   azdevops:["/azure/devops/user-guide/what-is-azure-devops",null],
   gitint:["/fabric/cicd/git-integration/intro-to-git-integration",null],
   entwicklung:[null,null], test:[null,null], produktion:[null,null], bereitstellung:[null,null],

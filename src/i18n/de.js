@@ -166,6 +166,7 @@ module.exports = {
     sap:["SAP","Die Unternehmenssoftware, in der viele Firmen-Kerndaten liegen."],
     gitgen:["Git","Versionsverwaltung für Code und Dateien."],
     github:["GitHub","Plattform zum Teilen und Verwalten von Git-Repositories."],
+    ghactions:["GitHub Actions","Automatisierte Abläufe im Repository: bauen, testen und bereitstellen bei jedem Push."],
     azdevops:["Azure DevOps","Repos, Boards und Pipelines für Entwicklungsteams."],
     gitint:["Git-Integration","Versionsverwaltung für Arbeitsbereiche."],
     entwicklung:["DEV (Entwicklung)","Hier wird gebaut und ausprobiert."],

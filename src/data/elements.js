@@ -137,6 +137,7 @@ const EMOJI = {
   sap:"💼",
   gitgen:"🌳",
   github:"🐙",
+  ghactions:"⚙️🐙",
   azdevops:"🔧",
   gitint:"🌿",
   entwicklung:"🧰",
