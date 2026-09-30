@@ -1,4 +1,4 @@
-// Baut aus src/ eine eigenständige HTML-Datei mit allen Sprachen und Sprachumschalter: dist/fabric-alchemie.html
+// Baut aus src/ eine eigenständige HTML-Datei mit allen Sprachen und Sprachumschalter: docs/index.html (von GitHub Pages direkt auslieferbar)
 //   node build.js              alle Sprachen einbauen
 //   node build.js de en        nur die genannten Sprachen einbauen
 //   node build.js --check      nur prüfen, nichts schreiben
@@ -88,11 +88,8 @@ const template = read("template.html");
 const style = read("style.css");
 const engine = read("game.js");
 const safe = s => s.replace(/<\/(script)/gi, "<\\/$1");
-fs.mkdirSync(path.join(root, "dist"), {recursive: true});
+fs.mkdirSync(path.join(root, "docs"), {recursive: true});
 
-// Alte Einzelsprach-Dateien aus früheren Builds entfernen
-fs.readdirSync(path.join(root, "dist")).filter(f => /^fabric-alchemie\.[a-z-]+\.html$/i.test(f))
-  .forEach(f => fs.unlinkSync(path.join(root, "dist", f)));
 
 const all = {};
 builds.forEach(b => { all[b.lang] = b.i18n; });
@@ -103,6 +100,6 @@ const html = template
   .replace("{{TITLE}}", () => first.i18n.ui.title)
   .replace("{{STYLE}}", () => style)
   .replace("{{SCRIPTS}}", () => scripts);
-const out = path.join("dist", "fabric-alchemie.html");
+const out = path.join("docs", "index.html");
 fs.writeFileSync(path.join(root, out), html);
 console.log("geschrieben:", out, `(${Math.round(html.length / 1024)} KB, Sprachen: ${builds.map(b => b.lang).join(", ")})`);
