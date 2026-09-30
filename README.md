@@ -1,5 +1,7 @@
 # Fabric Alchemie
 
+**Jetzt spielen: https://huhar.github.io/FabricAlchemy/** (Englisch direkt: https://huhar.github.io/FabricAlchemy/?lang=en)
+
 Ein God-Game (Little-Alchemy-Prinzip) rund um Microsoft Fabric und Datenthemen.
 Aus den vier Grundelementen Daten, Rechenleistung, Speicher und Netzwerk entstehen per Drag & Drop neue Elemente.
 
@@ -72,6 +74,6 @@ Der Spielstand liegt im Browser (`localStorage`, Schlüssel `fabric-alchemie-v2`
 
 1. Repo auf GitHub anlegen (für kostenlose Pages öffentlich) und den Ordner hochladen: `git init -b main`, `git add .`, `git commit`, `git remote add origin …`, `git push -u origin main`
 2. Auf GitHub: **Settings → Pages → Build and deployment → Source: „Deploy from a branch“**, Branch `main`, Ordner `/docs`, speichern
-3. Nach ein bis zwei Minuten läuft das Spiel unter `https://<name>.github.io/<repo>/`
+3. Nach ein bis zwei Minuten läuft das Spiel unter https://huhar.github.io/FabricAlchemy/
 
 Nach jeder Änderung: `node build.js`, dann `git add`, `git commit` und `git push`.
