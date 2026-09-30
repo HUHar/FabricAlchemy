@@ -67,13 +67,3 @@ Die Learn-Pfade in `links.js` sind in allen Sprachen gleich. Sie wurden für `de
 ## Spielstand
 
 Der Spielstand liegt im Browser (`localStorage`, Schlüssel `fabric-alchemie-v2`) und enthält nur Element-IDs. Er funktioniert deshalb in jeder Sprache gleich.
-
-## Veröffentlichen mit GitHub Pages
-
-`docs/index.html` wird von GitHub Pages direkt ausgeliefert.
-
-1. Repo auf GitHub anlegen (für kostenlose Pages öffentlich) und den Ordner hochladen: `git init -b main`, `git add .`, `git commit`, `git remote add origin …`, `git push -u origin main`
-2. Auf GitHub: **Settings → Pages → Build and deployment → Source: „Deploy from a branch“**, Branch `main`, Ordner `/docs`, speichern
-3. Nach ein bis zwei Minuten läuft das Spiel unter https://huhar.github.io/FabricAlchemy/
-
-Nach jeder Änderung: `node build.js`, dann `git add`, `git commit` und `git push`.
