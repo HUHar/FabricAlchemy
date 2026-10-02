@@ -45,7 +45,24 @@
     flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);color:var(--text);
     border-radius:8px;padding:7px 10px;font:inherit;font-size:.85rem;user-select:text;-webkit-user-select:text;
   }
-  #list{flex:1;overflow:auto;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  #list{flex:1;overflow-y:auto;overflow-x:hidden;padding:6px 10px 10px}
+  #list .chip{white-space:normal;max-width:100%}
+  .folder{margin-top:6px}
+  .folder-h{
+    display:flex;align-items:center;gap:7px;padding:7px 4px;cursor:pointer;
+    font-size:.8rem;font-weight:600;letter-spacing:.2px;color:var(--muted);
+    border-bottom:1px solid var(--line);
+  }
+  .folder-h:hover{color:var(--text)}
+  .folder-h .arrow{display:inline-block;font-size:.7rem;transition:transform .15s}
+  .folder.open .folder-h .arrow{transform:rotate(90deg)}
+  .folder-h .fname{flex:1}
+  .folder-h .fcount{font-weight:400;font-size:.72rem}
+  .folder-h .fresh-dot{width:7px;height:7px;border-radius:50%;background:var(--warn)}
+  .folder-b{display:flex;flex-wrap:wrap;gap:8px;padding:10px 0 4px}
+  i.final{display:inline-block;flex:none;width:8px;height:8px;border-radius:50%;background:#ef4444;margin-left:1px}
+  #tip .fin{margin-top:6px;color:#fca5a5;font-size:.8rem}
+  #legend{padding:8px 12px;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted);text-align:center}
   .chip,.item{
     display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:10px;
     background:var(--panel2);border:1px solid var(--line);font-size:.88rem;white-space:nowrap;

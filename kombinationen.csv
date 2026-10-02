@@ -1,0 +1,570 @@
+﻿Zutat A (de);Zutat B (de);Ergebnis (de);Bleibt erhalten (de);Zutat A (en);Zutat B (en);Ergebnis (en);Bleibt erhalten (en);Ordner Ergebnis (de);Ordner Ergebnis (en);Ergebnis ist final;ID Zutat A;ID Zutat B;ID Ergebnis
+Dateningenieur;Index;0;;Data engineer;Index;0;;Spaß & Zahlen;Fun & numbers;nein;ingenieur;index;zero
+Data Scientist;Index;1;;Data scientist;Index;1;;Spaß & Zahlen;Fun & numbers;nein;datascientist;index;one
+Datensatz;Datensatz;1:1-Beziehung;;Record;Record;One-to-one relationship;;Power BI & Modelle;Power BI & models;nein;datensatz;datensatz;rel11
+Datensatz;Datensätze;1:n-Beziehung;;Record;Records;One-to-many relationship;;Power BI & Modelle;Power BI & models;nein;datensatz;datensaetze;reln
+Datenbank;Rechenleistung;Abfrage;;Database;Compute;Query;;Datenbanken & SQL;Databases & SQL;nein;datenbank;rechen;abfrage
+Cache;Netzwerk;Abkürzung;;Cache;Network;Fast path;;Fabric-Plattform;Fabric platform;nein;cache;netz;abkuerzung
+Berechtigung;Mandant;Admin;;Permission;Tenant;Admin;;DevOps & Betrieb;DevOps & operations;nein;berechtigung;mandant;admin
+Berechtigung;Server;Admin;;Permission;Server;Admin;;DevOps & Betrieb;DevOps & operations;nein;berechtigung;server;admin
+Datensicherheit;Mandant;Admin;;Data security;Tenant;Admin;;DevOps & Betrieb;DevOps & operations;nein;sicherheit;mandant;admin
+Admin;Fabric-Kapazität;Admin-Portal;;Admin;Fabric capacity;Admin portal;;DevOps & Betrieb;DevOps & operations;ja;admin;fabcap;adminportal
+Admin;Mandant;Admin-Portal;;Admin;Tenant;Admin portal;;DevOps & Betrieb;DevOps & operations;ja;admin;mandant;adminportal
+Admin;Microsoft Fabric;Admin-Portal;;Admin;Microsoft Fabric;Admin portal;;DevOps & Betrieb;DevOps & operations;ja;admin;fabric;adminportal
+Ereignis;Skript;Aktion;;Event;Script;Action;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;ereignis;skript;aktion
+Netzwerk;Skript;Aktion;;Network;Script;Action;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;netz;skript;aktion
+Aktion;Datenstrom;Aktivator;;Action;Data stream;Activator;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;aktion;datenstrom;aktivator
+Aktion;Ereignis;Aktivator;;Action;Event;Activator;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;aktion;ereignis;aktivator
+Aktion;Eventstream;Aktivator;;Action;Eventstream;Activator;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;aktion;eventstream;aktivator
+Aktion;Microsoft Fabric;Aktivator;;Action;Microsoft Fabric;Activator;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;aktion;fabric;aktivator
+Eventstream;Kennzahl;Aktivator;;Eventstream;Measure;Activator;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;eventstream;kennzahl;aktivator
+Button;Semantisches Modell;Aktualisierung;;Button;Semantic model;Refresh;;Power BI & Modelle;Power BI & models;nein;button;semmodell;refresh
+Aktion;Kennzahl;Alert;;Action;Measure;Alert;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;aktion;kennzahl;alert
+Aktivator;Kennzahl;Alert;;Activator;Measure;Alert;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;aktivator;kennzahl;alert
+Ereignis;Kennzahl;Alert;;Event;Measure;Alert;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;ereignis;kennzahl;alert
+Cloud;Speicher;Amazon S3;;Cloud;Storage;Amazon S3;;Cloud & Partner;Cloud & partners;nein;cloud;speicher;s3
+Daten;Kennzahl;Analyse;;Data;Measure;Analysis;;Grundlagen;Basics;nein;daten;kennzahl;analyse
+Rechenleistung;Tabelle;Analyse;;Compute;Table;Analysis;;Grundlagen;Basics;nein;rechen;tabelle;analyse
+Cluster;Notebook;Apache Spark;;Cluster;Notebook;Apache Spark;;Data Engineering & Spark;Data engineering & Spark;nein;cluster;notebook;spark
+Cluster;Skript;Apache Spark;;Cluster;Script;Apache Spark;;Data Engineering & Spark;Data engineering & Spark;nein;cluster;skript;spark
+Notebook;Server;Apache Spark;;Notebook;Server;Apache Spark;;Data Engineering & Spark;Data engineering & Spark;nein;notebook;server;spark
+Bereitstellung;Quelle;API;;Deployment;Source;API;;DevOps & Betrieb;DevOps & operations;nein;bereitstellung;quelle;api
+Berechtigung;Microsoft Fabric;Arbeitsbereich;;Permission;Microsoft Fabric;Workspace;;Fabric-Plattform;Fabric platform;nein;berechtigung;fabric;arbeitsbereich
+Microsoft Fabric;Server;Arbeitsbereich;;Microsoft Fabric;Server;Workspace;;Fabric-Plattform;Fabric platform;nein;fabric;server;arbeitsbereich
+Microsoft Azure;Transformation;Azure Data Factory;;Microsoft Azure;Transformation;Azure Data Factory;;Datenintegration;Data integration;nein;azure;transformation;adf
+Datei;Microsoft Azure;Azure Data Lake Storage;;File;Microsoft Azure;Azure Data Lake Storage;;Cloud & Partner;Cloud & partners;nein;datei;azure;adls
+Microsoft Azure;Speicher;Azure Data Lake Storage;;Microsoft Azure;Storage;Azure Data Lake Storage;;Cloud & Partner;Cloud & partners;nein;azure;speicher;adls
+Databricks;Microsoft Azure;Azure Databricks;;Databricks;Microsoft Azure;Azure Databricks;;Cloud & Partner;Cloud & partners;ja;databricks;azure;azdatabricks
+Bereitstellungspipeline;Git;Azure DevOps;;Deployment pipeline;Git;Azure DevOps;;DevOps & Betrieb;DevOps & operations;nein;deploy;gitgen;azdevops
+Datenpipeline;Git;Azure DevOps;;Data pipeline;Git;Azure DevOps;;DevOps & Betrieb;DevOps & operations;nein;pipeline;gitgen;azdevops
+Git;Microsoft Azure;Azure DevOps;;Git;Microsoft Azure;Azure DevOps;;DevOps & Betrieb;DevOps & operations;nein;gitgen;azure;azdevops
+Cloud;SQL Server;Azure SQL;;Cloud;SQL Server;Azure SQL;;Cloud & Partner;Cloud & partners;nein;cloud;sqlserver;azuresql
+Cloud-Datenbank;Microsoft Azure;Azure SQL;;Cloud database;Microsoft Azure;Azure SQL;;Cloud & Partner;Cloud & partners;nein;clouddb;azure;azuresql
+Cloud-Datenbank;SQL Server;Azure SQL;;Cloud database;SQL Server;Azure SQL;;Cloud & Partner;Cloud & partners;nein;clouddb;sqlserver;azuresql
+Datenbank;Microsoft Azure;Azure SQL;;Database;Microsoft Azure;Azure SQL;;Cloud & Partner;Cloud & partners;nein;datenbank;azure;azuresql
+Microsoft Azure;T-SQL;Azure SQL;;Microsoft Azure;T-SQL;Azure SQL;;Cloud & Partner;Cloud & partners;nein;azure;sql;azuresql
+Analyse;Microsoft Azure;Azure Synapse;;Analysis;Microsoft Azure;Azure Synapse;;Cloud & Partner;Cloud & partners;ja;analyse;azure;synapse
+Data Warehouse;Microsoft Azure;Azure Synapse;;Data warehouse;Microsoft Azure;Azure Synapse;;Cloud & Partner;Cloud & partners;ja;warehouse;azure;synapse
+Microsoft Azure;SQL Server;Azure Synapse;;Microsoft Azure;SQL Server;Azure Synapse;;Cloud & Partner;Cloud & partners;ja;azure;sqlserver;synapse
+Datei;Uhr;Batchverarbeitung;;File;Clock;Batch processing;;Datenintegration;Data integration;nein;datei;uhr;batch
+Tabelle;Uhr;Batchverarbeitung;;Table;Clock;Batch processing;;Datenintegration;Data integration;nein;tabelle;uhr;batch
+Arbeitsbereich;Datensatz;Berechtigung;;Workspace;Record;Permission;;Governance & Sicherheit;Governance & security;nein;arbeitsbereich;datensatz;berechtigung
+Arbeitsbereich;Datensicherheit;Berechtigung;;Workspace;Data security;Permission;;Governance & Sicherheit;Governance & security;nein;arbeitsbereich;sicherheit;berechtigung
+Cloud;DEV (Entwicklung);Bereitstellung;;Cloud;DEV (development);Deployment;;DevOps & Betrieb;DevOps & operations;nein;cloud;entwicklung;bereitstellung
+Cloud;Kopie;Bereitstellung;;Cloud;Copy;Deployment;;DevOps & Betrieb;DevOps & operations;nein;cloud;kopie;bereitstellung
+Cloud;Skript;Bereitstellung;;Cloud;Script;Deployment;;DevOps & Betrieb;DevOps & operations;nein;cloud;skript;bereitstellung
+Arbeitsbereich;Bereitstellung;Bereitstellungspipeline;;Workspace;Deployment;Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;bereitstellung;deploy
+Bereitstellung;Datenpipeline;Bereitstellungspipeline;;Deployment;Data pipeline;Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;bereitstellung;pipeline;deploy
+Bereitstellung;DEV (Entwicklung);Bereitstellungspipeline;;Deployment;DEV (development);Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;bereitstellung;entwicklung;deploy
+Bereitstellung;Microsoft Fabric;Bereitstellungspipeline;;Deployment;Microsoft Fabric;Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;bereitstellung;fabric;deploy
+Datenpipeline;Git-Integration;Bereitstellungspipeline;;Data pipeline;Git integration;Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;pipeline;gitint;deploy
+Datenpipeline;Test;Bereitstellungspipeline;;Data pipeline;Test;Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;pipeline;test;deploy
+DEV (Entwicklung);PROD (Produktion);Bereitstellungspipeline;;DEV (development);PROD (production);Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;entwicklung;produktion;deploy
+DEV (Entwicklung);Test;Bereitstellungspipeline;;DEV (development);Test;Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;entwicklung;test;deploy
+PROD (Produktion);Test;Bereitstellungspipeline;;PROD (production);Test;Deployment pipeline;;DevOps & Betrieb;DevOps & operations;nein;produktion;test;deploy
+Kennzahl;Visualisierung;Bericht;;Measure;Visualization;Report;;Power BI & Modelle;Power BI & models;nein;kennzahl;visual;bericht
+Semantisches Modell;Visualisierung;Bericht;;Semantic model;Visualization;Report;;Power BI & Modelle;Power BI & models;nein;semmodell;visual;bericht
+Visualisierung;Visualisierung;Bericht;;Visualization;Visualization;Report;;Power BI & Modelle;Power BI & models;nein;visual;visual;bericht
+1:1-Beziehung;1:n-Beziehung;Beziehung;;One-to-one relationship;One-to-many relationship;Relationship;;Power BI & Modelle;Power BI & models;nein;rel11;reln;beziehung
+1:1-Beziehung;n:m-Beziehung;Beziehung;;One-to-one relationship;Many-to-many relationship;Relationship;;Power BI & Modelle;Power BI & models;nein;rel11;relnm;beziehung
+1:n-Beziehung;n:m-Beziehung;Beziehung;;One-to-many relationship;Many-to-many relationship;Relationship;;Power BI & Modelle;Power BI & models;nein;reln;relnm;beziehung
+Semantisches Modell;Tabelle;Beziehung;;Semantic model;Table;Relationship;;Power BI & Modelle;Power BI & models;nein;semmodell;tabelle;beziehung
+Tabelle;Tabelle;Beziehung;;Table;Table;Relationship;;Power BI & Modelle;Power BI & models;nein;tabelle;tabelle;beziehung
+F64;F64;Big Bucks;;F64;F64;Big bucks;;Kapazität & Kosten;Capacity & cost;ja;f64;f64;bigbucks
+Datei;Lakehouse;Bronze-Schicht;;File;Lakehouse;Bronze layer;;Data Engineering & Spark;Data engineering & Spark;nein;datei;lakehouse;bronze
+Daten;Lakehouse;Bronze-Schicht;;Data;Lakehouse;Bronze layer;;Data Engineering & Spark;Data engineering & Spark;nein;daten;lakehouse;bronze
+Kopie;Lakehouse;Bronze-Schicht;;Copy;Lakehouse;Bronze layer;;Data Engineering & Spark;Data engineering & Spark;nein;kopie;lakehouse;bronze
+Manuell;Trigger;Button;;Manual;Trigger;Button;;Power BI & Modelle;Power BI & models;nein;manual;trigger;button
+Rechenleistung;Speicher;Cache;;Compute;Storage;Cache;;Grundlagen;Basics;nein;rechen;speicher;cache
+Server;Speicher;Cache;;Server;Storage;Cache;;Grundlagen;Basics;nein;server;speicher;cache
+Aktion;Server;CLI;;Action;Server;CLI;;DevOps & Betrieb;DevOps & operations;nein;aktion;server;cli
+Datei;Skript;CLI;;File;Script;CLI;;DevOps & Betrieb;DevOps & operations;nein;datei;skript;cli
+Netzwerk;Speicher;Cloud;;Network;Storage;Cloud;;Cloud & Partner;Cloud & partners;nein;netz;speicher;cloud
+Cloud;Datenbank;Cloud-Datenbank;;Cloud;Database;Cloud database;;Datenbanken & SQL;Databases & SQL;nein;cloud;datenbank;clouddb
+Cloud;Tabelle;Cloud-Datenbank;;Cloud;Table;Cloud database;;Datenbanken & SQL;Databases & SQL;nein;cloud;tabelle;clouddb
+Cloud;Microsoft Fabric;Cloudverbindung;;Cloud;Microsoft Fabric;Cloud connection;;Datenintegration;Data integration;ja;cloud;fabric;cloudverb
+Netzwerk;Server;Cluster;;Network;Server;Cluster;;Data Engineering & Spark;Data engineering & Spark;nein;netz;server;cluster
+Server;Server;Cluster;;Server;Server;Cluster;;Data Engineering & Spark;Data engineering & Spark;nein;server;server;cluster
+Daten WG;Daten WG;Community;;Daten WG;Daten WG;Community;;Community;Community;nein;datawg;datawg;community
+Daten WG;Netzwerk;Community;;Daten WG;Network;Community;;Community;Community;nein;datawg;netz;community
+Datenteam;Datenteam;Community;;Data team;Data team;Community;;Community;Community;nein;team;team;community
+Semantisches Modell;Semantisches Modell;Composite-Modell;;Semantic model;Semantic model;Composite model;;Power BI & Modelle;Power BI & models;nein;semmodell;semmodell;composite
+Composite-Modell;Semantisches Modell;Composite-Modell (2. Ebene);;Composite model;Semantic model;Composite model (2nd level);;Power BI & Modelle;Power BI & models;nein;composite;semmodell;composite2
+Composite-Modell (2. Ebene);Semantisches Modell;Composite-Modell (3. Ebene);;Composite model (2nd level);Semantic model;Composite model (3rd level);;Power BI & Modelle;Power BI & models;nein;composite2;semmodell;composite3
+KI;Notebook-Sprachen;Copilot;;AI;Notebook languages;Copilot;;KI & Data Science;AI & data science;nein;ki;sprachen;copilot
+KI;Skript;Copilot;;AI;Script;Copilot;;KI & Data Science;AI & data science;nein;ki;skript;copilot
+Arbeitsbereich;Copilot;Copilot in Fabric;;Workspace;Copilot;Copilot in Fabric;;KI & Data Science;AI & data science;nein;arbeitsbereich;copilot;copilotfab
+Copilot;Microsoft Fabric;Copilot in Fabric;;Copilot;Microsoft Fabric;Copilot in Fabric;;KI & Data Science;AI & data science;nein;copilot;fabric;copilotfab
+Copilot;Power BI;Copilot in Fabric;;Copilot;Power BI;Copilot in Fabric;;KI & Data Science;AI & data science;nein;copilot;powerbi;copilotfab
+KI;Microsoft Fabric;Copilot in Fabric;;AI;Microsoft Fabric;Copilot in Fabric;;KI & Data Science;AI & data science;nein;ki;fabric;copilotfab
+Cloud;Datenbank;Cosmos DB;;Cloud;Database;Cosmos DB;;Cloud & Partner;Cloud & partners;nein;cloud;datenbank;cosmos
+Abfrage;Datei;CSV;;Query;File;CSV;;Dateien & Formate;Files & formats;nein;abfrage;datei;csv
+Bericht;Bericht;Dashboard;;Report;Report;Dashboard;;Power BI & Modelle;Power BI & models;nein;bericht;bericht;dashboard
+Bericht;Power BI;Dashboard;;Report;Power BI;Dashboard;;Power BI & Modelle;Power BI & models;nein;bericht;powerbi;dashboard
+Bericht;Visualisierung;Dashboard;;Report;Visualization;Dashboard;;Power BI & Modelle;Power BI & models;nein;bericht;visual;dashboard
+Copilot;Semantisches Modell;Data Agent;;Copilot;Semantic model;Data agent;;KI & Data Science;AI & data science;nein;copilot;semmodell;agent
+Copilot in Fabric;Lakehouse;Data Agent;;Copilot in Fabric;Lakehouse;Data agent;;KI & Data Science;AI & data science;nein;copilotfab;lakehouse;agent
+Copilot in Fabric;Semantisches Modell;Data Agent;;Copilot in Fabric;Semantic model;Data agent;;KI & Data Science;AI & data science;nein;copilotfab;semmodell;agent
+KI;Lakehouse;Data Agent;;AI;Lakehouse;Data agent;;KI & Data Science;AI & data science;nein;ki;lakehouse;agent
+KI;Semantisches Modell;Data Agent;;AI;Semantic model;Data agent;;KI & Data Science;AI & data science;nein;ki;semmodell;agent
+Apache Spark;Lakehouse;Data Engineering;;Apache Spark;Lakehouse;Data Engineering;;Data Engineering & Spark;Data engineering & Spark;nein;spark;lakehouse;dataeng
+Apache Spark;Microsoft Fabric;Data Engineering;;Apache Spark;Microsoft Fabric;Data Engineering;;Data Engineering & Spark;Data engineering & Spark;nein;spark;fabric;dataeng
+Datenpipeline;Lakehouse;Data Engineering;;Data pipeline;Lakehouse;Data Engineering;;Data Engineering & Spark;Data engineering & Spark;nein;pipeline;lakehouse;dataeng
+Lakehouse;Notebook;Data Engineering;;Lakehouse;Notebook;Data Engineering;;Data Engineering & Spark;Data engineering & Spark;nein;lakehouse;notebook;dataeng
+Azure Data Factory;Datenpipeline;Data Factory;;Azure Data Factory;Data pipeline;Data Factory;;Datenintegration;Data integration;ja;adf;pipeline;factory
+Azure Data Factory;Microsoft Fabric;Data Factory;;Azure Data Factory;Microsoft Fabric;Data Factory;;Datenintegration;Data integration;ja;adf;fabric;factory
+Dataflow Gen2;Datenpipeline;Data Factory;;Dataflow Gen2;Data pipeline;Data Factory;;Datenintegration;Data integration;ja;dataflow;pipeline;factory
+Dataflow Gen2;Microsoft Fabric;Data Factory;;Dataflow Gen2;Microsoft Fabric;Data Factory;;Datenintegration;Data integration;ja;dataflow;fabric;factory
+Daten;Datenbewegung;Data Factory;;Data;Data movement;Data Factory;;Datenintegration;Data integration;ja;daten;bewegung;factory
+Daten;Datenpipeline;Data Factory;;Data;Data pipeline;Data Factory;;Datenintegration;Data integration;ja;daten;pipeline;factory
+Datenpipeline;Microsoft Fabric;Data Factory;;Data pipeline;Microsoft Fabric;Data Factory;;Datenintegration;Data integration;ja;pipeline;fabric;factory
+ETL;Microsoft Fabric;Data Factory;;ETL;Microsoft Fabric;Data Factory;;Datenintegration;Data integration;ja;etl;fabric;factory
+ETL;Orchestrierung;Data Factory;;ETL;Orchestration;Data Factory;;Datenintegration;Data integration;ja;etl;orchestrierung;factory
+Domäne;Domäne;Data Mesh;;Domain;Domain;Data mesh;;Governance & Sicherheit;Governance & security;ja;domaene;domaene;datamesh
+Domäne;Netzwerk;Data Mesh;;Domain;Network;Data mesh;;Governance & Sicherheit;Governance & security;ja;domaene;netz;datamesh
+Daten;KI;Data Science;;Data;AI;Data Science;;KI & Data Science;AI & data science;nein;daten;ki;datascience
+Daten;ML-Modell;Data Science;;Data;ML model;Data Science;;KI & Data Science;AI & data science;nein;daten;mlmodell;datascience
+Daten;Notebook;Data Science;;Data;Notebook;Data Science;;KI & Data Science;AI & data science;nein;daten;notebook;datascience
+Experiment;Microsoft Fabric;Data Science;;Experiment;Microsoft Fabric;Data Science;;KI & Data Science;AI & data science;nein;experiment;fabric;datascience
+Experiment;ML-Modell;Data Science;;Experiment;ML model;Data Science;;KI & Data Science;AI & data science;nein;experiment;mlmodell;datascience
+KI;Notebook;Data Science;;AI;Notebook;Data Science;;KI & Data Science;AI & data science;nein;ki;notebook;datascience
+Maschinelles Lernen;Microsoft Fabric;Data Science;;Machine learning;Microsoft Fabric;Data Science;;KI & Data Science;AI & data science;nein;ml;fabric;datascience
+Data Science;Datenanalyst;Data Scientist;;Data Science;Data analyst;Data scientist;;Rollen & Team;Roles & team;nein;datascience;analyst;datascientist
+Datenanalyst;ML-Modell;Data Scientist;;Data analyst;ML model;Data scientist;;Rollen & Team;Roles & team;nein;analyst;mlmodell;datascientist
+Daten;T-SQL;Data Warehouse;;Data;T-SQL;Data warehouse;;Fabric-Plattform;Fabric platform;nein;daten;sql;warehouse
+Datenbank;Microsoft Fabric;Data Warehouse;;Database;Microsoft Fabric;Data warehouse;;Fabric-Plattform;Fabric platform;nein;datenbank;fabric;warehouse
+OneLake;T-SQL;Data Warehouse;;OneLake;T-SQL;Data warehouse;;Fabric-Plattform;Fabric platform;nein;onelake;sql;warehouse
+T-SQL;Tabelle;Data Warehouse;;T-SQL;Table;Data warehouse;;Fabric-Plattform;Fabric platform;nein;sql;tabelle;warehouse
+Apache Spark;Cloud;Databricks;;Apache Spark;Cloud;Databricks;;Cloud & Partner;Cloud & partners;nein;spark;cloud;databricks
+Apache Spark;Microsoft Azure;Databricks;;Apache Spark;Microsoft Azure;Databricks;;Cloud & Partner;Cloud & partners;nein;spark;azure;databricks
+Cloud;Notebook;Databricks;;Cloud;Notebook;Databricks;;Cloud & Partner;Cloud & partners;nein;cloud;notebook;databricks
+Cache;Datensätze;Dataflow Gen1;;Cache;Records;Dataflow Gen1;;Datenintegration;Data integration;nein;cache;datensaetze;dataflowgen1
+Dataflow Gen1;Microsoft Fabric;Dataflow Gen2;;Dataflow Gen1;Microsoft Fabric;Dataflow Gen2;;Datenintegration;Data integration;nein;dataflowgen1;fabric;dataflow
+Daten;M (Power Query);Dataflow Gen2;;Data;M (Power Query);Dataflow Gen2;;Datenintegration;Data integration;nein;daten;m;dataflow
+Daten;Transformation;Dataflow Gen2;;Data;Transformation;Dataflow Gen2;;Datenintegration;Data integration;nein;daten;transformation;dataflow
+ETL;Low-Code;Dataflow Gen2;;ETL;Low-code;Dataflow Gen2;;Datenintegration;Data integration;nein;etl;lowcode;dataflow
+Low-Code;Transformation;Dataflow Gen2;;Low-code;Transformation;Dataflow Gen2;;Datenintegration;Data integration;nein;lowcode;transformation;dataflow
+Microsoft Fabric;Transformation;Dataflow Gen2;;Microsoft Fabric;Transformation;Dataflow Gen2;;Datenintegration;Data integration;nein;fabric;transformation;dataflow
+Tabelle;Transformation;Dataflow Gen2;;Table;Transformation;Dataflow Gen2;;Datenintegration;Data integration;nein;tabelle;transformation;dataflow
+Meetup;SQL Server;DataMonsters;;Meetup;SQL Server;DataMonsters;;Community;Community;ja;meetup;sqlserver;datamonsters
+SQL Server;User Group;DataMonsters;;SQL Server;User group;DataMonsters;;Community;Community;ja;sqlserver;usergroup;datamonsters
+Daten;Speicher;Datei;;Data;Storage;File;;Dateien & Formate;Files & formats;nein;daten;speicher;datei
+Datensatz;Speicher;Datei;;Record;Storage;File;;Dateien & Formate;Files & formats;nein;datensatz;speicher;datei
+Data Scientist;Microsoft Fabric;Daten WG;;Data scientist;Microsoft Fabric;Daten WG;;Rollen & Team;Roles & team;nein;datascientist;fabric;datawg
+Data Scientist;Power BI;Daten WG;;Data scientist;Power BI;Daten WG;;Rollen & Team;Roles & team;nein;datascientist;powerbi;datawg
+Datenanalyst;Microsoft Fabric;Daten WG;;Data analyst;Microsoft Fabric;Daten WG;;Rollen & Team;Roles & team;nein;analyst;fabric;datawg
+Datenanalyst;Power BI;Daten WG;;Data analyst;Power BI;Daten WG;;Rollen & Team;Roles & team;nein;analyst;powerbi;datawg
+Dateningenieur;Microsoft Fabric;Daten WG;;Data engineer;Microsoft Fabric;Daten WG;;Rollen & Team;Roles & team;nein;ingenieur;fabric;datawg
+Dateningenieur;Power BI;Daten WG;;Data engineer;Power BI;Daten WG;;Rollen & Team;Roles & team;nein;ingenieur;powerbi;datawg
+Datenteam;Microsoft Fabric;Daten WG;;Data team;Microsoft Fabric;Daten WG;;Rollen & Team;Roles & team;nein;team;fabric;datawg
+Datenteam;Power BI;Daten WG;;Data team;Power BI;Daten WG;;Rollen & Team;Roles & team;nein;team;powerbi;datawg
+Analyse;Bericht;Datenanalyst;;Analysis;Report;Data analyst;;Rollen & Team;Roles & team;nein;analyse;bericht;analyst
+Analyse;Power BI;Datenanalyst;;Analysis;Power BI;Data analyst;;Rollen & Team;Roles & team;nein;analyse;powerbi;analyst
+Bericht;Kennzahl;Datenanalyst;;Report;Measure;Data analyst;;Rollen & Team;Roles & team;nein;bericht;kennzahl;analyst
+Dashboard;Kennzahl;Datenanalyst;;Dashboard;Measure;Data analyst;;Rollen & Team;Roles & team;nein;dashboard;kennzahl;analyst
+Kennzahl;Power BI;Datenanalyst;;Measure;Power BI;Data analyst;;Rollen & Team;Roles & team;nein;kennzahl;powerbi;analyst
+Server;Tabelle;Datenbank;;Server;Table;Database;;Datenbanken & SQL;Databases & SQL;nein;server;tabelle;datenbank
+Speicher;Tabelle;Datenbank;;Storage;Table;Database;;Datenbanken & SQL;Databases & SQL;nein;speicher;tabelle;datenbank
+Datei;Netzwerk;Datenbewegung;;File;Network;Data movement;;Grundlagen;Basics;nein;datei;netz;bewegung
+Netzwerk;Netzwerk;Datenbewegung;;Network;Network;Data movement;;Grundlagen;Basics;nein;netz;netz;bewegung
+Daten;OneLake-Katalog;Datenherkunft;;Data;OneLake catalog;Data lineage;;Governance & Sicherheit;Governance & security;nein;daten;katalog;herkunft
+Datenpipeline;OneLake-Katalog;Datenherkunft;;Data pipeline;OneLake catalog;Data lineage;;Governance & Sicherheit;Governance & security;nein;pipeline;katalog;herkunft
+Datenstrom;OneLake-Katalog;Datenherkunft;;Data stream;OneLake catalog;Data lineage;;Governance & Sicherheit;Governance & security;nein;datenstrom;katalog;herkunft
+Apache Spark;Datenpipeline;Dateningenieur;;Apache Spark;Data pipeline;Data engineer;;Rollen & Team;Roles & team;nein;spark;pipeline;ingenieur
+Data Engineering;Datenpipeline;Dateningenieur;;Data Engineering;Data pipeline;Data engineer;;Rollen & Team;Roles & team;nein;dataeng;pipeline;ingenieur
+Data Engineering;Microsoft Fabric;Dateningenieur;;Data Engineering;Microsoft Fabric;Data engineer;;Rollen & Team;Roles & team;nein;dataeng;fabric;ingenieur
+Datenpipeline;Notebook;Dateningenieur;;Data pipeline;Notebook;Data engineer;;Rollen & Team;Roles & team;nein;pipeline;notebook;ingenieur
+Datenpipeline;Notebook-Sprachen;Dateningenieur;;Data pipeline;Notebook languages;Data engineer;;Rollen & Team;Roles & team;nein;pipeline;sprachen;ingenieur
+Data Engineering;Tabelle;Datenmodellierung;;Data Engineering;Table;Data modeling;;Power BI & Modelle;Power BI & models;nein;dataeng;tabelle;datamodelling
+Batchverarbeitung;Orchestrierung;Datenpipeline;;Batch processing;Orchestration;Data pipeline;;Datenintegration;Data integration;nein;batch;orchestrierung;pipeline
+Daten;Orchestrierung;Datenpipeline;;Data;Orchestration;Data pipeline;;Datenintegration;Data integration;nein;daten;orchestrierung;pipeline
+Datenbewegung;Orchestrierung;Datenpipeline;;Data movement;Orchestration;Data pipeline;;Datenintegration;Data integration;nein;bewegung;orchestrierung;pipeline
+Kopieraktivität;Orchestrierung;Datenpipeline;;Copy activity;Orchestration;Data pipeline;;Datenintegration;Data integration;nein;copyact;orchestrierung;pipeline
+Microsoft Fabric;Orchestrierung;Datenpipeline;;Microsoft Fabric;Orchestration;Data pipeline;;Datenintegration;Data integration;nein;fabric;orchestrierung;pipeline
+Notebook;Uhr;Datenpipeline;;Notebook;Clock;Data pipeline;;Datenintegration;Data integration;nein;notebook;uhr;pipeline
+Semantisches Modell;Uhr;Datenpipeline;;Semantic model;Clock;Data pipeline;;Datenintegration;Data integration;nein;semmodell;uhr;pipeline
+Transformation;Uhr;Datenpipeline;;Transformation;Clock;Data pipeline;;Datenintegration;Data integration;nein;transformation;uhr;pipeline
+Datensätze;Notebook;Datenqualitätsprüfungen;;Records;Notebook;Data quality checks;;Governance & Sicherheit;Governance & security;ja;datensaetze;notebook;dqchecks
+Daten;Daten;Datensatz;;Data;Data;Record;;Grundlagen;Basics;nein;daten;daten;datensatz
+Datensatz;Kopieraktivität;Datensatz;Kopieraktivität;Record;Copy activity;Record;Copy activity;Grundlagen;Basics;nein;datensatz;copyact;datensatz
+Datensatz;Datensatz;Datensätze;;Record;Record;Records;;Grundlagen;Basics;nein;datensatz;datensatz;datensaetze
+Admin;Netzwerk;Datensicherheit;;Admin;Network;Data security;;Governance & Sicherheit;Governance & security;nein;admin;netz;sicherheit
+Berechtigung;Daten;Datensicherheit;;Permission;Data;Data security;;Governance & Sicherheit;Governance & security;nein;berechtigung;daten;sicherheit
+Berechtigung;Netzwerk;Datensicherheit;;Permission;Network;Data security;;Governance & Sicherheit;Governance & security;nein;berechtigung;netz;sicherheit
+Datensatz;Netzwerk;Datenstrom;;Record;Network;Data stream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datensatz;netz;datenstrom
+Ereignis;Ereignis;Datenstrom;;Event;Event;Data stream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;ereignis;ereignis;datenstrom
+Data Science;Datenanalyst;Datenteam;;Data Science;Data analyst;Data team;;Rollen & Team;Roles & team;nein;datascience;analyst;team
+Data Science;Dateningenieur;Datenteam;;Data Science;Data engineer;Data team;;Rollen & Team;Roles & team;nein;datascience;ingenieur;team
+Datenanalyst;Dateningenieur;Datenteam;;Data analyst;Data engineer;Data team;;Rollen & Team;Roles & team;nein;analyst;ingenieur;team
+Kennzahl;Skript;DAX;;Measure;Script;DAX;;Power BI & Modelle;Power BI & models;nein;kennzahl;skript;dax
+Semantisches Modell;Skript;DAX;;Semantic model;Script;DAX;;Power BI & Modelle;Power BI & models;nein;semmodell;skript;dax
+Community;DAX;DAX Studio;;Community;DAX;DAX Studio;;Community;Community;ja;community;dax;daxstudio
+Lakehouse;Parquet;Delta-Tabelle;;Lakehouse;Parquet;Delta table;;Dateien & Formate;Files & formats;nein;lakehouse;parquet;delta
+OneLake;Parquet;Delta-Tabelle;;OneLake;Parquet;Delta table;;Dateien & Formate;Files & formats;nein;onelake;parquet;delta
+Parquet;Tabelle;Delta-Tabelle;;Parquet;Table;Delta table;;Dateien & Formate;Files & formats;nein;parquet;tabelle;delta
+Arbeitsbereich;Notebook;DEV (Entwicklung);;Workspace;Notebook;DEV (development);;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;notebook;entwicklung
+Git;Skript;DEV (Entwicklung);;Git;Script;DEV (development);;DevOps & Betrieb;DevOps & operations;nein;gitgen;skript;entwicklung
+Server;Skript;DEV (Entwicklung);;Server;Script;DEV (development);;DevOps & Betrieb;DevOps & operations;nein;server;skript;entwicklung
+Delta-Tabelle;Power BI;Direct Lake;;Delta table;Power BI;Direct Lake;;Power BI & Modelle;Power BI & models;nein;delta;powerbi;directlake
+Delta-Tabelle;Semantisches Modell;Direct Lake;;Delta table;Semantic model;Direct Lake;;Power BI & Modelle;Power BI & models;nein;delta;semmodell;directlake
+Lakehouse;Semantisches Modell;Direct Lake;;Lakehouse;Semantic model;Direct Lake;;Power BI & Modelle;Power BI & models;nein;lakehouse;semmodell;directlake
+OneLake;Power BI;Direct Lake;;OneLake;Power BI;Direct Lake;;Power BI & Modelle;Power BI & models;nein;onelake;powerbi;directlake
+OneLake;Semantisches Modell;Direct Lake;;OneLake;Semantic model;Direct Lake;;Power BI & Modelle;Power BI & models;nein;onelake;semmodell;directlake
+Arbeitsbereich;Arbeitsbereich;Domäne;;Workspace;Workspace;Domain;;Governance & Sicherheit;Governance & security;nein;arbeitsbereich;arbeitsbereich;domaene
+Arbeitsbereich;Governance;Domäne;;Workspace;Governance;Domain;;Governance & Sicherheit;Governance & security;nein;arbeitsbereich;governance;domaene
+Arbeitsbereich;Mandant;Domäne;;Workspace;Tenant;Domain;;Governance & Sicherheit;Governance & security;nein;arbeitsbereich;mandant;domaene
+Datensatz;Uhr;Ereignis;;Record;Clock;Event;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datensatz;uhr;ereignis
+Sensor;Uhr;Ereignis;;Sensor;Clock;Event;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;sensor;uhr;ereignis
+Datenbewegung;Transformation;ETL;;Data movement;Transformation;ETL;;Datenintegration;Data integration;nein;bewegung;transformation;etl
+Datenpipeline;Datensätze;ETL;;Data pipeline;Records;ETL;;Datenintegration;Data integration;nein;pipeline;datensaetze;etl
+Datensätze;Notebook;ETL;;Records;Notebook;ETL;;Datenintegration;Data integration;nein;datensaetze;notebook;etl
+Quelle;Transformation;ETL;;Source;Transformation;ETL;;Datenintegration;Data integration;nein;quelle;transformation;etl
+Analyse;Ereignis;Eventhouse;;Analysis;Event;Eventhouse;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;analyse;ereignis;eventhouse
+Daten;KQL;Eventhouse;;Data;KQL;Eventhouse;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;daten;kql;eventhouse
+Datenbank;Datenstrom;Eventhouse;;Database;Data stream;Eventhouse;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenbank;datenstrom;eventhouse
+Datenbank;Eventstream;Eventhouse;;Database;Eventstream;Eventhouse;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenbank;eventstream;eventhouse
+Datenbank;KQL;Eventhouse;;Database;KQL;Eventhouse;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenbank;kql;eventhouse
+Datenstrom;KQL;Eventhouse;;Data stream;KQL;Eventhouse;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenstrom;kql;eventhouse
+Daten;Ereignis;Eventstream;;Data;Event;Eventstream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;daten;ereignis;eventstream
+Datenstrom;Ereignis;Eventstream;;Data stream;Event;Eventstream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenstrom;ereignis;eventstream
+Datenstrom;IoT;Eventstream;;Data stream;IoT;Eventstream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenstrom;iot;eventstream
+Datenstrom;Microsoft Fabric;Eventstream;;Data stream;Microsoft Fabric;Eventstream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenstrom;fabric;eventstream
+Datenstrom;OneLake;Eventstream;;Data stream;OneLake;Eventstream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenstrom;onelake;eventstream
+Datenstrom;Transformation;Eventstream;;Data stream;Transformation;Eventstream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datenstrom;transformation;eventstream
+Ereignis;Sensor;Eventstream;;Event;Sensor;Eventstream;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;ereignis;sensor;eventstream
+Abfrage;Datei;Excel;;Query;File;Excel;;Dateien & Formate;Files & formats;nein;abfrage;datei;excel
+Maschinelles Lernen;Notebook;Experiment;;Machine learning;Notebook;Experiment;;KI & Data Science;AI & data science;nein;ml;notebook;experiment
+Maschinelles Lernen;Skript;Experiment;;Machine learning;Script;Experiment;;KI & Data Science;AI & data science;nein;ml;skript;experiment
+ML-Modell;Notebook;Experiment;;ML model;Notebook;Experiment;;KI & Data Science;AI & data science;nein;mlmodell;notebook;experiment
+CSV;Power BI;Export;;CSV;Power BI;Export;;Power BI & Modelle;Power BI & models;ja;csv;powerbi;export
+Excel;Power BI;Export;;Excel;Power BI;Export;;Power BI & Modelle;Power BI & models;ja;excel;powerbi;export
+CSV;Power BI;Export nach CSV;;CSV;Power BI;Export to CSV;;Power BI & Modelle;Power BI & models;ja;csv;powerbi;exportcsv
+Excel;Power BI;Export nach Excel;;Excel;Power BI;Export to Excel;;Power BI & Modelle;Power BI & models;ja;excel;powerbi;exportexcel
+Fabric-Kapazität;Skalierung;F-SKU;;Fabric capacity;Scaling;F SKU;;Kapazität & Kosten;Capacity & cost;nein;fabcap;skalierung;sku
+Kapazität;Skalierung;F-SKU;;Capacity;Scaling;F SKU;;Kapazität & Kosten;Capacity & cost;nein;kapazitaet;skalierung;sku
+F8;F8;F16;;F8;F8;F16;;Kapazität & Kosten;Capacity & cost;nein;f8;f8;f16
+F-SKU;Kleines Budget;F2;;F SKU;Small budget;F2;;Kapazität & Kosten;Capacity & cost;nein;sku;smallbudget;f2
+F16;F16;F32;;F16;F16;F32;;Kapazität & Kosten;Capacity & cost;nein;f16;f16;f32
+F2;F2;F4;;F2;F2;F4;;Kapazität & Kosten;Capacity & cost;nein;f2;f2;f4
+F32;F32;F64;;F32;F32;F64;;Kapazität & Kosten;Capacity & cost;nein;f32;f32;f64
+F4;F4;F8;;F4;F4;F8;;Kapazität & Kosten;Capacity & cost;nein;f4;f4;f8
+Community;Ereignis;FabCon;;Community;Event;FabCon;;Community;Community;ja;community;ereignis;fabcon
+Arbeitsbereich;CLI;Fabric CLI;;Workspace;CLI;Fabric CLI;;DevOps & Betrieb;DevOps & operations;ja;arbeitsbereich;cli;fabcli
+CLI;Fabric-REST-APIs;Fabric CLI;;CLI;Fabric REST APIs;Fabric CLI;;DevOps & Betrieb;DevOps & operations;ja;cli;restapi;fabcli
+CLI;Microsoft Fabric;Fabric CLI;;CLI;Microsoft Fabric;Fabric CLI;;DevOps & Betrieb;DevOps & operations;ja;cli;fabric;fabcli
+CLI;OneLake;Fabric CLI;;CLI;OneLake;Fabric CLI;;DevOps & Betrieb;DevOps & operations;ja;cli;onelake;fabcli
+Community;Microsoft Fabric;Fabric Community;;Community;Microsoft Fabric;Fabric Community;;Community;Community;ja;community;fabric;fabriccommunity
+Data Agent;Microsoft Fabric;Fabric IQ;;Data agent;Microsoft Fabric;Fabric IQ;;KI & Data Science;AI & data science;nein;agent;fabric;fabriciq
+Data Agent;Ontology;Fabric IQ;;Data agent;Ontology;Fabric IQ;;KI & Data Science;AI & data science;nein;agent;ontology;fabriciq
+Data Agent;Semantisches Modell;Fabric IQ;;Data agent;Semantic model;Fabric IQ;;KI & Data Science;AI & data science;nein;agent;semmodell;fabriciq
+Microsoft Fabric;Ontology;Fabric IQ;;Microsoft Fabric;Ontology;Fabric IQ;;KI & Data Science;AI & data science;nein;fabric;ontology;fabriciq
+Community;GitHub;Fabric Toolbox;;Community;GitHub;Fabric Toolbox;;Community;Community;ja;community;github;toolbox
+Kapazität;Microsoft Fabric;Fabric-Kapazität;;Capacity;Microsoft Fabric;Fabric capacity;;Kapazität & Kosten;Capacity & cost;nein;kapazitaet;fabric;fabcap
+Microsoft Fabric;Rechenleistung;Fabric-Kapazität;;Microsoft Fabric;Compute;Fabric capacity;;Kapazität & Kosten;Capacity & cost;nein;fabric;rechen;fabcap
+API;Microsoft Fabric;Fabric-REST-APIs;;API;Microsoft Fabric;Fabric REST APIs;;DevOps & Betrieb;DevOps & operations;nein;api;fabric;restapi
+Arbeitsbereich;REST;Fabric-REST-APIs;;Workspace;REST;Fabric REST APIs;;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;rest;restapi
+Arbeitsbereich;Terraform;Fabric-REST-APIs;;Workspace;Terraform;Fabric REST APIs;;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;terraform;restapi
+Microsoft Fabric;REST;Fabric-REST-APIs;;Microsoft Fabric;REST;Fabric REST APIs;;DevOps & Betrieb;DevOps & operations;nein;fabric;rest;restapi
+Microsoft Fabric;Terraform;Fabric-REST-APIs;;Microsoft Fabric;Terraform;Fabric REST APIs;;DevOps & Betrieb;DevOps & operations;nein;fabric;terraform;restapi
+Analyse;Fabric-Kapazität;FUAM;;Analysis;Fabric capacity;FUAM;;Kapazität & Kosten;Capacity & cost;ja;analyse;fabcap;fuam
+Kopie;Skript;Git;;Copy;Script;Git;;DevOps & Betrieb;DevOps & operations;nein;kopie;skript;gitgen
+Skript;Speicher;Git;;Script;Storage;Git;;DevOps & Betrieb;DevOps & operations;nein;skript;speicher;gitgen
+Arbeitsbereich;Azure DevOps;Git-Integration;;Workspace;Azure DevOps;Git integration;;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;azdevops;gitint
+Arbeitsbereich;Git;Git-Integration;;Workspace;Git;Git integration;;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;gitgen;gitint
+Arbeitsbereich;GitHub;Git-Integration;;Workspace;GitHub;Git integration;;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;github;gitint
+Arbeitsbereich;Skript;Git-Integration;;Workspace;Script;Git integration;;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;skript;gitint
+Azure DevOps;Microsoft Fabric;Git-Integration;;Azure DevOps;Microsoft Fabric;Git integration;;DevOps & Betrieb;DevOps & operations;nein;azdevops;fabric;gitint
+Daten;Git;Git-Integration;;Data;Git;Git integration;;DevOps & Betrieb;DevOps & operations;nein;daten;gitgen;gitint
+Git;Microsoft Fabric;Git-Integration;;Git;Microsoft Fabric;Git integration;;DevOps & Betrieb;DevOps & operations;nein;gitgen;fabric;gitint
+GitHub;Microsoft Fabric;Git-Integration;;GitHub;Microsoft Fabric;Git integration;;DevOps & Betrieb;DevOps & operations;nein;github;fabric;gitint
+Cloud;Git;GitHub;;Cloud;Git;GitHub;;DevOps & Betrieb;DevOps & operations;nein;cloud;gitgen;github
+Git;Netzwerk;GitHub;;Git;Network;GitHub;;DevOps & Betrieb;DevOps & operations;nein;gitgen;netz;github
+Aktion;GitHub;GitHub Actions;;Action;GitHub;GitHub Actions;;DevOps & Betrieb;DevOps & operations;ja;aktion;github;ghactions
+Analyse;Silber-Schicht;Gold-Schicht;;Analysis;Silver layer;Gold layer;;Data Engineering & Spark;Data engineering & Spark;nein;analyse;silber;gold
+Apache Spark;Silber-Schicht;Gold-Schicht;;Apache Spark;Silver layer;Gold layer;;Data Engineering & Spark;Data engineering & Spark;nein;spark;silber;gold
+Dataflow Gen2;Silber-Schicht;Gold-Schicht;;Dataflow Gen2;Silver layer;Gold layer;;Data Engineering & Spark;Data engineering & Spark;nein;dataflow;silber;gold
+Notebook;Silber-Schicht;Gold-Schicht;;Notebook;Silver layer;Gold layer;;Data Engineering & Spark;Data engineering & Spark;nein;notebook;silber;gold
+Silber-Schicht;Skript;Gold-Schicht;;Silver layer;Script;Gold layer;;Data Engineering & Spark;Data engineering & Spark;nein;silber;skript;gold
+Silber-Schicht;Transformation;Gold-Schicht;;Silver layer;Transformation;Gold layer;;Data Engineering & Spark;Data engineering & Spark;nein;silber;transformation;gold
+Admin;OneLake-Katalog;Governance;;Admin;OneLake catalog;Governance;;Governance & Sicherheit;Governance & security;nein;admin;katalog;governance
+Datenherkunft;Datensicherheit;Governance;;Data lineage;Data security;Governance;;Governance & Sicherheit;Governance & security;nein;herkunft;sicherheit;governance
+Datensicherheit;Domäne;Governance;;Data security;Domain;Governance;;Governance & Sicherheit;Governance & security;nein;sicherheit;domaene;governance
+Datensicherheit;OneLake-Katalog;Governance;;Data security;OneLake catalog;Governance;;Governance & Sicherheit;Governance & security;nein;sicherheit;katalog;governance
+Community;Power BI;Guy in a Cube;;Community;Power BI;Guy in a Cube;;Community;Community;ja;community;powerbi;giac
+0;1;I/O;;0;1;I/O;;Spaß & Zahlen;Fun & numbers;ja;zero;one;io
+Abfrage;Tabelle;Index;;Query;Table;Index;;Datenbanken & SQL;Databases & SQL;nein;abfrage;tabelle;index
+Cache;Tabelle;Index;;Cache;Table;Index;;Datenbanken & SQL;Databases & SQL;nein;cache;tabelle;index
+Suche;Tabelle;Index;;Search;Table;Index;;Datenbanken & SQL;Databases & SQL;nein;suche;tabelle;index
+Cloud;Sensor;IoT;;Cloud;Sensor;IoT;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;cloud;sensor;iot
+Netzwerk;Sensor;IoT;;Network;Sensor;IoT;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;netz;sensor;iot
+Cloud;Cluster;Kapazität;;Cloud;Cluster;Capacity;;Kapazität & Kosten;Capacity & cost;nein;cloud;cluster;kapazitaet
+Cloud;Rechenleistung;Kapazität;;Cloud;Compute;Capacity;;Kapazität & Kosten;Capacity & cost;nein;cloud;rechen;kapazitaet
+F64;Power BI;Kein Geld;;F64;Power BI;No money;;Kapazität & Kosten;Capacity & cost;ja;f64;powerbi;nomoney
+Analyse;Datensatz;Kennzahl;;Analysis;Record;Measure;;Power BI & Modelle;Power BI & models;nein;analyse;datensatz;kennzahl
+DAX;Tabelle;Kennzahl;;DAX;Table;Measure;;Power BI & Modelle;Power BI & models;nein;dax;tabelle;kennzahl
+Skript;Tabelle;Kennzahl;;Script;Table;Measure;;Power BI & Modelle;Power BI & models;nein;skript;tabelle;kennzahl
+Maschinelles Lernen;Rechenleistung;KI;;Machine learning;Compute;AI;;KI & Data Science;AI & data science;nein;ml;rechen;ki
+ML-Modell;Rechenleistung;KI;;ML model;Compute;AI;;KI & Data Science;AI & data science;nein;mlmodell;rechen;ki
+Datensatz;Fabric-Kapazität;Kleines Budget;;Record;Fabric capacity;Small budget;;Kapazität & Kosten;Capacity & cost;nein;datensatz;fabcap;smallbudget
+Datensatz;Kapazität;Kleines Budget;;Record;Capacity;Small budget;;Kapazität & Kosten;Capacity & cost;nein;datensatz;kapazitaet;smallbudget
+Datei;Datei;Kopie;;File;File;Copy;;Dateien & Formate;Files & formats;nein;datei;datei;kopie
+Datei;Datenbewegung;Kopie;;File;Data movement;Copy;;Dateien & Formate;Files & formats;nein;datei;bewegung;kopie
+Datensatz;Kopieraktivität;Kopie;Kopieraktivität;Record;Copy activity;Copy;Copy activity;Dateien & Formate;Files & formats;nein;datensatz;copyact;kopie
+Daten;Kopie;Kopieraktivität;;Data;Copy;Copy activity;;Datenintegration;Data integration;nein;daten;kopie;copyact
+Datenpipeline;Kopie;Kopieraktivität;;Data pipeline;Copy;Copy activity;;Datenintegration;Data integration;nein;pipeline;kopie;copyact
+Kopie;Quelle;Kopieraktivität;;Copy;Source;Copy activity;;Datenintegration;Data integration;nein;kopie;quelle;copyact
+Kopie;Ziel;Kopieraktivität;;Copy;Destination;Copy activity;;Datenintegration;Data integration;nein;kopie;ziel;copyact
+Quelle;Ziel;Kopieraktivität;;Source;Destination;Copy activity;;Datenintegration;Data integration;nein;quelle;ziel;copyact
+Datei;Datenpipeline;Kopierauftrag;;File;Data pipeline;Copy job;;Datenintegration;Data integration;ja;datei;pipeline;copyjob
+Kopie;Microsoft Fabric;Kopierauftrag;;Copy;Microsoft Fabric;Copy job;;Datenintegration;Data integration;ja;kopie;fabric;copyjob
+Kopieraktivität;Microsoft Fabric;Kopierauftrag;;Copy activity;Microsoft Fabric;Copy job;;Datenintegration;Data integration;ja;copyact;fabric;copyjob
+Abfrage;Datenstrom;KQL;;Query;Data stream;KQL;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;abfrage;datenstrom;kql
+Abfrage;Ereignis;KQL;;Query;Event;KQL;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;abfrage;ereignis;kql
+Eventhouse;Skript;KQL;;Eventhouse;Script;KQL;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;eventhouse;skript;kql
+Eventstream;Skript;KQL;;Eventstream;Script;KQL;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;eventstream;skript;kql
+Apache Spark;Daten;Lakehouse;;Apache Spark;Data;Lakehouse;;Fabric-Plattform;Fabric platform;nein;spark;daten;lakehouse
+Apache Spark;Delta-Tabelle;Lakehouse;;Apache Spark;Delta table;Lakehouse;;Fabric-Plattform;Fabric platform;nein;spark;delta;lakehouse
+Datei;Datenbank;Lakehouse;;File;Database;Lakehouse;;Fabric-Plattform;Fabric platform;nein;datei;datenbank;lakehouse
+Delta-Tabelle;OneLake;Lakehouse;;Delta table;OneLake;Lakehouse;;Fabric-Plattform;Fabric platform;nein;delta;onelake;lakehouse
+Medallion-Architektur;Microsoft Fabric;Lakehouse;;Medallion architecture;Microsoft Fabric;Lakehouse;;Fabric-Plattform;Fabric platform;nein;medallion;fabric;lakehouse
+OneLake;Parquet;Lakehouse;;OneLake;Parquet;Lakehouse;;Fabric-Plattform;Fabric platform;nein;onelake;parquet;lakehouse
+OneLake;Tabelle;Lakehouse;;OneLake;Table;Lakehouse;;Fabric-Plattform;Fabric platform;nein;onelake;tabelle;lakehouse
+Dataflow Gen2;Visualisierung;Low-Code;;Dataflow Gen2;Visualization;Low-code;;Datenintegration;Data integration;nein;dataflow;visual;lowcode
+Skript;Visualisierung;Low-Code;;Script;Visualization;Low-code;;Datenintegration;Data integration;nein;skript;visual;lowcode
+Dataflow Gen2;Notebook-Sprachen;M (Power Query);;Dataflow Gen2;Notebook languages;M (Power Query);;Datenintegration;Data integration;nein;dataflow;sprachen;m
+Dataflow Gen2;Skript;M (Power Query);;Dataflow Gen2;Script;M (Power Query);;Datenintegration;Data integration;nein;dataflow;skript;m
+Admin;Cloud;Mandant;;Admin;Cloud;Tenant;;Governance & Sicherheit;Governance & security;nein;admin;cloud;mandant
+Datensicherheit;Microsoft Azure;Mandant;;Data security;Microsoft Azure;Tenant;;Governance & Sicherheit;Governance & security;nein;sicherheit;azure;mandant
+Datensicherheit;Microsoft Fabric;Mandant;;Data security;Microsoft Fabric;Tenant;;Governance & Sicherheit;Governance & security;nein;sicherheit;fabric;mandant
+Admin;Aktion;Manuell;;Admin;Action;Manual;;Datenintegration;Data integration;nein;admin;aktion;manual
+Aktion;Dateningenieur;Manuell;;Action;Data engineer;Manual;;Datenintegration;Data integration;nein;aktion;ingenieur;manual
+Analyse;Notebook;Maschinelles Lernen;;Analysis;Notebook;Machine learning;;KI & Data Science;AI & data science;nein;analyse;notebook;ml
+Analyse;Python;Maschinelles Lernen;;Analysis;Python;Machine learning;;KI & Data Science;AI & data science;nein;analyse;python;ml
+Daten;KI;Maschinelles Lernen;;Data;AI;Machine learning;;KI & Data Science;AI & data science;nein;daten;ki;ml
+Kennzahl;Notebook;Maschinelles Lernen;;Measure;Notebook;Machine learning;;KI & Data Science;AI & data science;nein;kennzahl;notebook;ml
+Speicher;View;Materialized View;;Storage;View;Materialized view;;Datenbanken & SQL;Databases & SQL;ja;speicher;view;matview
+Bronze-Schicht;Gold-Schicht;Medallion-Architektur;;Bronze layer;Gold layer;Medallion architecture;;Data Engineering & Spark;Data engineering & Spark;nein;bronze;gold;medallion
+Bronze-Schicht;Silber-Schicht;Medallion-Architektur;;Bronze layer;Silver layer;Medallion architecture;;Data Engineering & Spark;Data engineering & Spark;nein;bronze;silber;medallion
+Gold-Schicht;Lakehouse;Medallion-Architektur;;Gold layer;Lakehouse;Medallion architecture;;Data Engineering & Spark;Data engineering & Spark;nein;gold;lakehouse;medallion
+Gold-Schicht;Silber-Schicht;Medallion-Architektur;;Gold layer;Silver layer;Medallion architecture;;Data Engineering & Spark;Data engineering & Spark;nein;gold;silber;medallion
+Ereignis;User Group;Meetup;;Event;User group;Meetup;;Community;Community;nein;ereignis;usergroup;meetup
+Datei;OneLake-Katalog;Metadaten;;File;OneLake catalog;Metadata;;Governance & Sicherheit;Governance & security;nein;datei;katalog;metadata
+Daten;Datenherkunft;Metadaten;;Data;Data lineage;Metadata;;Governance & Sicherheit;Governance & security;nein;daten;herkunft;metadata
+Daten;OneLake-Katalog;Metadaten;;Data;OneLake catalog;Metadata;;Governance & Sicherheit;Governance & security;nein;daten;katalog;metadata
+Datenherkunft;Delta-Tabelle;Metadaten;;Data lineage;Delta table;Metadata;;Governance & Sicherheit;Governance & security;nein;herkunft;delta;metadata
+OneLake-Katalog;Parquet;Metadaten;;OneLake catalog;Parquet;Metadata;;Governance & Sicherheit;Governance & security;nein;katalog;parquet;metadata
+OneLake-Katalog;Tabelle;Metadaten;;OneLake catalog;Table;Metadata;;Governance & Sicherheit;Governance & security;nein;katalog;tabelle;metadata
+ETL;Metadaten;Metadatengesteuertes ETL;;ETL;Metadata;Metadata-driven ETL;;Datenintegration;Data integration;ja;etl;metadata;mdetl
+Cloud;Cluster;Microsoft Azure;;Cloud;Cluster;Microsoft Azure;;Cloud & Partner;Cloud & partners;nein;cloud;cluster;azure
+Cloud;Server;Microsoft Azure;;Cloud;Server;Microsoft Azure;;Cloud & Partner;Cloud & partners;nein;cloud;server;azure
+Cloud;Daten;Microsoft Fabric;;Cloud;Data;Microsoft Fabric;;Fabric-Plattform;Fabric platform;nein;cloud;daten;fabric
+Daten;Netzwerk;Microsoft Fabric;;Data;Network;Microsoft Fabric;;Fabric-Plattform;Fabric platform;nein;daten;netz;fabric
+Daten;Ziel;Microsoft Fabric;;Data;Destination;Microsoft Fabric;;Fabric-Plattform;Fabric platform;nein;daten;ziel;fabric
+Fabric IQ;Work IQ;Microsoft IQ;;Fabric IQ;Work IQ;Microsoft IQ;;KI & Data Science;AI & data science;ja;fabriciq;workiq;microsoftiq
+Datenherkunft;Governance;Microsoft Purview;;Data lineage;Governance;Microsoft Purview;;Governance & Sicherheit;Governance & security;ja;herkunft;governance;purview
+Datenherkunft;OneLake-Katalog;Microsoft Purview;;Data lineage;OneLake catalog;Microsoft Purview;;Governance & Sicherheit;Governance & security;ja;herkunft;katalog;purview
+Governance;Microsoft Fabric;Microsoft Purview;;Governance;Microsoft Fabric;Microsoft Purview;;Governance & Sicherheit;Governance & security;ja;governance;fabric;purview
+Governance;OneLake-Katalog;Microsoft Purview;;Governance;OneLake catalog;Microsoft Purview;;Governance & Sicherheit;Governance & security;ja;governance;katalog;purview
+Daten;Maschinelles Lernen;ML-Modell;;Data;Machine learning;ML model;;KI & Data Science;AI & data science;nein;daten;ml;mlmodell
+Datensatz;Experiment;ML-Modell;;Record;Experiment;ML model;;KI & Data Science;AI & data science;nein;datensatz;experiment;mlmodell
+Datensatz;KI;ML-Modell;;Record;AI;ML model;;KI & Data Science;AI & data science;nein;datensatz;ki;mlmodell
+Datensatz;Maschinelles Lernen;ML-Modell;;Record;Machine learning;ML model;;KI & Data Science;AI & data science;nein;datensatz;ml;mlmodell
+Maschinelles Lernen;Tabelle;ML-Modell;;Machine learning;Table;ML model;;KI & Data Science;AI & data science;nein;ml;tabelle;mlmodell
+Community;Data Scientist;MVP;;Community;Data scientist;MVP;;Community;Community;ja;community;datascientist;mvp
+Community;Datenanalyst;MVP;;Community;Data analyst;MVP;;Community;Community;ja;community;analyst;mvp
+Community;Dateningenieur;MVP;;Community;Data engineer;MVP;;Community;Community;ja;community;ingenieur;mvp
+Datensätze;Datensätze;n:m-Beziehung;;Records;Records;Many-to-many relationship;;Power BI & Modelle;Power BI & models;nein;datensaetze;datensaetze;relnm
+Daten;PySpark;Notebook;;Data;PySpark;Notebook;;Data Engineering & Spark;Data engineering & Spark;nein;daten;pyspark;notebook
+Daten;Python;Notebook;;Data;Python;Notebook;;Data Engineering & Spark;Data engineering & Spark;nein;daten;python;notebook
+Microsoft Fabric;Notebook-Sprachen;Notebook;;Microsoft Fabric;Notebook languages;Notebook;;Data Engineering & Spark;Data engineering & Spark;nein;fabric;sprachen;notebook
+Microsoft Fabric;Python;Notebook;;Microsoft Fabric;Python;Notebook;;Data Engineering & Spark;Data engineering & Spark;nein;fabric;python;notebook
+Microsoft Fabric;Skript;Notebook;;Microsoft Fabric;Script;Notebook;;Data Engineering & Spark;Data engineering & Spark;nein;fabric;skript;notebook
+Apache Spark;Skript;Notebook-Sprachen;;Apache Spark;Script;Notebook languages;;Data Engineering & Spark;Data engineering & Spark;nein;spark;skript;sprachen
+Notebook;Skript;Notebook-Sprachen;;Notebook;Script;Notebook languages;;Data Engineering & Spark;Data engineering & Spark;nein;notebook;skript;sprachen
+Microsoft Fabric;Server;On-Premises-Datengateway;;Microsoft Fabric;Server;On-premises data gateway;;Datenintegration;Data integration;ja;fabric;server;onpremgw
+Cloud;Datei;OneLake;;Cloud;File;OneLake;;Fabric-Plattform;Fabric platform;nein;cloud;datei;onelake
+CSV;Microsoft Fabric;OneLake;;CSV;Microsoft Fabric;OneLake;;Fabric-Plattform;Fabric platform;nein;csv;fabric;onelake
+Datei;Microsoft Fabric;OneLake;;File;Microsoft Fabric;OneLake;;Fabric-Plattform;Fabric platform;nein;datei;fabric;onelake
+Excel;Microsoft Fabric;OneLake;;Excel;Microsoft Fabric;OneLake;;Fabric-Plattform;Fabric platform;nein;excel;fabric;onelake
+Microsoft Fabric;Speicher;OneLake;;Microsoft Fabric;Storage;OneLake;;Fabric-Plattform;Fabric platform;nein;fabric;speicher;onelake
+Daten;Domäne;OneLake-Katalog;;Data;Domain;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;daten;domaene;katalog
+Daten;Governance;OneLake-Katalog;;Data;Governance;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;daten;governance;katalog
+Daten;Suche;OneLake-Katalog;;Data;Search;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;daten;suche;katalog
+Datenbank;OneLake;OneLake-Katalog;;Database;OneLake;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;datenbank;onelake;katalog
+Domäne;Governance;OneLake-Katalog;;Domain;Governance;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;domaene;governance;katalog
+Governance;OneLake;OneLake-Katalog;;Governance;OneLake;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;governance;onelake;katalog
+Microsoft Fabric;Suche;OneLake-Katalog;;Microsoft Fabric;Search;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;fabric;suche;katalog
+OneLake;Suche;OneLake-Katalog;;OneLake;Search;OneLake catalog;;Governance & Sicherheit;Governance & security;nein;onelake;suche;katalog
+Berechtigung;Datensatz;OneLake-Sicherheit;;Permission;Record;OneLake security;;Governance & Sicherheit;Governance & security;ja;berechtigung;datensatz;onelakesec
+Berechtigung;OneLake;OneLake-Sicherheit;;Permission;OneLake;OneLake security;;Governance & Sicherheit;Governance & security;ja;berechtigung;onelake;onelakesec
+Daten;Datensicherheit;OneLake-Sicherheit;;Data;Data security;OneLake security;;Governance & Sicherheit;Governance & security;ja;daten;sicherheit;onelakesec
+Datensicherheit;Lakehouse;OneLake-Sicherheit;;Data security;Lakehouse;OneLake security;;Governance & Sicherheit;Governance & security;ja;sicherheit;lakehouse;onelakesec
+Datensicherheit;OneLake;OneLake-Sicherheit;;Data security;OneLake;OneLake security;;Governance & Sicherheit;Governance & security;ja;sicherheit;onelake;onelakesec
+Beziehung;Metadaten;Ontology;;Relationship;Metadata;Ontology;;KI & Data Science;AI & data science;nein;beziehung;metadata;ontology
+Datenmodellierung;Metadaten;Ontology;;Data modeling;Metadata;Ontology;;KI & Data Science;AI & data science;nein;datamodelling;metadata;ontology
+Governance;Semantisches Modell;Ontology;;Governance;Semantic model;Ontology;;KI & Data Science;AI & data science;nein;governance;semmodell;ontology
+Abfrage;Index;Optimierung;;Query;Index;Optimization;;Kapazität & Kosten;Capacity & cost;nein;abfrage;index;optimierung
+Analyse;Cache;Optimierung;;Analysis;Cache;Optimization;;Kapazität & Kosten;Capacity & cost;nein;analyse;cache;optimierung
+Kennzahl;Skalierung;Optimierung;;Measure;Scaling;Optimization;;Kapazität & Kosten;Capacity & cost;nein;kennzahl;skalierung;optimierung
+Aktion;Uhr;Orchestrierung;;Action;Clock;Orchestration;;Datenintegration;Data integration;nein;aktion;uhr;orchestrierung
+Skript;Uhr;Orchestrierung;;Script;Clock;Orchestration;;Datenintegration;Data integration;nein;skript;uhr;orchestrierung
+Analyse;Datei;Parquet;;Analysis;File;Parquet;;Dateien & Formate;Files & formats;nein;analyse;datei;parquet
+Data Warehouse;Datei;Parquet;;Data warehouse;File;Parquet;;Dateien & Formate;Files & formats;nein;warehouse;datei;parquet
+Datei;Tabelle;Parquet;;File;Table;Parquet;;Dateien & Formate;Files & formats;nein;datei;tabelle;parquet
+Cluster;Tabelle;Partition;;Cluster;Table;Partition;;Datenbanken & SQL;Databases & SQL;ja;cluster;tabelle;partition
+Delta-Tabelle;Server;Partition;;Delta table;Server;Partition;;Datenbanken & SQL;Databases & SQL;ja;delta;server;partition
+Meetup;Power BI;PBIG;;Meetup;Power BI;PBIG;;Community;Community;ja;meetup;powerbi;pbig
+Power BI;User Group;PBIG;;Power BI;User group;PBIG;;Community;Community;ja;powerbi;usergroup;pbig
+Bericht;Microsoft Fabric;Power BI;;Report;Microsoft Fabric;Power BI;;Power BI & Modelle;Power BI & models;nein;bericht;fabric;powerbi
+Bericht;Semantisches Modell;Power BI;;Report;Semantic model;Power BI;;Power BI & Modelle;Power BI & models;nein;bericht;semmodell;powerbi
+Daten;Visualisierung;Power BI;;Data;Visualization;Power BI;;Power BI & Modelle;Power BI & models;nein;daten;visual;powerbi
+F32;F32;Power BI;;F32;F32;Power BI;;Power BI & Modelle;Power BI & models;nein;f32;f32;powerbi
+Microsoft Fabric;Visualisierung;Power BI;;Microsoft Fabric;Visualization;Power BI;;Power BI & Modelle;Power BI & models;nein;fabric;visual;powerbi
+Arbeitsbereich;Test;PROD (Produktion);;Workspace;Test;PROD (production);;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;test;produktion
+Cloud;Test;PROD (Produktion);;Cloud;Test;PROD (production);;DevOps & Betrieb;DevOps & operations;nein;cloud;test;produktion
+Server;Test;PROD (Produktion);;Server;Test;PROD (production);;DevOps & Betrieb;DevOps & operations;nein;server;test;produktion
+Test;Ziel;PROD (Produktion);;Test;Destination;PROD (production);;DevOps & Betrieb;DevOps & operations;nein;test;ziel;produktion
+Analyse;Datenbank;Protokolldateien;;Analysis;Database;Log files;;DevOps & Betrieb;DevOps & operations;ja;analyse;datenbank;logfiles
+Apache Spark;Python;PySpark;;Apache Spark;Python;PySpark;;Data Engineering & Spark;Data engineering & Spark;nein;spark;python;pyspark
+Python;Spark-Pool;PySpark;;Python;Spark pool;PySpark;;Data Engineering & Spark;Data engineering & Spark;nein;python;sparkpool;pyspark
+Analyse;Notebook-Sprachen;Python;;Analysis;Notebook languages;Python;;Data Engineering & Spark;Data engineering & Spark;nein;analyse;sprachen;python
+Analyse;Skript;Python;;Analysis;Script;Python;;Data Engineering & Spark;Data engineering & Spark;nein;analyse;skript;python
+Datei;Notebook-Sprachen;Python;;File;Notebook languages;Python;;Data Engineering & Spark;Data engineering & Spark;nein;datei;sprachen;python
+Datei;Netzwerk;Quelle;;File;Network;Source;;Datenintegration;Data integration;nein;datei;netz;quelle
+Datenbank;Netzwerk;Quelle;;Database;Network;Source;;Datenintegration;Data integration;nein;datenbank;netz;quelle
+Analyse;Skript;R;;Analysis;Script;R;;Data Engineering & Spark;Data engineering & Spark;ja;analyse;skript;r
+Kennzahl;Notebook-Sprachen;R;;Measure;Notebook languages;R;;Data Engineering & Spark;Data engineering & Spark;ja;kennzahl;sprachen;r
+Analyse;Eventstream;Real-Time Intelligence;;Analysis;Eventstream;Real-Time Intelligence;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;analyse;eventstream;echtzeit
+Daten;Uhr;Real-Time Intelligence;;Data;Clock;Real-Time Intelligence;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;daten;uhr;echtzeit
+Datenstrom;Uhr;Real-Time Intelligence;;Data stream;Clock;Real-Time Intelligence;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;datenstrom;uhr;echtzeit
+Ereignis;Sekunde;Real-Time Intelligence;;Event;Second;Real-Time Intelligence;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;ereignis;sekunde;echtzeit
+Eventhouse;Microsoft Fabric;Real-Time Intelligence;;Eventhouse;Microsoft Fabric;Real-Time Intelligence;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;eventhouse;fabric;echtzeit
+IoT;Microsoft Fabric;Real-Time Intelligence;;IoT;Microsoft Fabric;Real-Time Intelligence;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;iot;fabric;echtzeit
+Sekunde;Sensor;Real-Time Intelligence;;Second;Sensor;Real-Time Intelligence;;Echtzeit-Intelligenz;Real-Time Intelligence;ja;sekunde;sensor;echtzeit
+Aktualisierung;Delta-Tabelle;Reframing;;Refresh;Delta table;Reframing;;Power BI & Modelle;Power BI & models;ja;refresh;delta;reframing
+Aktualisierung;Direct Lake;Reframing;;Refresh;Direct Lake;Reframing;;Power BI & Modelle;Power BI & models;ja;refresh;directlake;reframing
+Direct Lake;Metadaten;Reframing;;Direct Lake;Metadata;Reframing;;Power BI & Modelle;Power BI & models;ja;directlake;metadata;reframing
+Direct Lake;Uhr;Reframing;;Direct Lake;Clock;Reframing;;Power BI & Modelle;Power BI & models;ja;directlake;uhr;reframing
+Fabric-Kapazität;Uhr;Reservierung;;Fabric capacity;Clock;Reservation;;Kapazität & Kosten;Capacity & cost;ja;fabcap;uhr;reservierung
+Abfrage;API;REST;;Query;API;REST;;DevOps & Betrieb;DevOps & operations;nein;abfrage;api;rest
+Abfrage;Cloud;REST;;Query;Cloud;REST;;DevOps & Betrieb;DevOps & operations;nein;abfrage;cloud;rest
+Abfrage;Netzwerk;REST;;Query;Network;REST;;DevOps & Betrieb;DevOps & operations;nein;abfrage;netz;rest
+Abfrage;Server;REST;;Query;Server;REST;;DevOps & Betrieb;DevOps & operations;nein;abfrage;server;rest
+API;Netzwerk;REST;;API;Network;REST;;DevOps & Betrieb;DevOps & operations;nein;api;netz;rest
+Datenbank;Server;SAP;;Database;Server;SAP;;Cloud & Partner;Cloud & partners;nein;datenbank;server;sap
+Apache Spark;Notebook-Sprachen;Scala;;Apache Spark;Notebook languages;Scala;;Data Engineering & Spark;Data engineering & Spark;ja;spark;sprachen;scala
+Notebook-Sprachen;Server;Scala;;Notebook languages;Server;Scala;;Data Engineering & Spark;Data engineering & Spark;ja;sprachen;server;scala
+Uhr;Uhr;Sekunde;;Clock;Clock;Second;;Grundlagen;Basics;nein;uhr;uhr;sekunde
+Notebook;Power BI;Semantic Link;;Notebook;Power BI;Semantic link;;KI & Data Science;AI & data science;ja;notebook;powerbi;semlink
+Notebook;Semantisches Modell;Semantic Link;;Notebook;Semantic model;Semantic link;;KI & Data Science;AI & data science;ja;notebook;semmodell;semlink
+Notebook-Sprachen;Semantisches Modell;Semantic Link;;Notebook languages;Semantic model;Semantic link;;KI & Data Science;AI & data science;ja;sprachen;semmodell;semlink
+Python;Semantisches Modell;Semantic Link;;Python;Semantic model;Semantic link;;KI & Data Science;AI & data science;ja;python;semmodell;semlink
+1:n-Beziehung;Kennzahl;Semantisches Modell;;One-to-many relationship;Measure;Semantic model;;Power BI & Modelle;Power BI & models;nein;reln;kennzahl;semmodell
+Beziehung;DAX;Semantisches Modell;;Relationship;DAX;Semantic model;;Power BI & Modelle;Power BI & models;nein;beziehung;dax;semmodell
+Beziehung;Kennzahl;Semantisches Modell;;Relationship;Measure;Semantic model;;Power BI & Modelle;Power BI & models;nein;beziehung;kennzahl;semmodell
+Data Warehouse;Power BI;Semantisches Modell;;Data warehouse;Power BI;Semantic model;;Power BI & Modelle;Power BI & models;nein;warehouse;powerbi;semmodell
+Daten;DAX;Semantisches Modell;;Data;DAX;Semantic model;;Power BI & Modelle;Power BI & models;nein;daten;dax;semmodell
+Datenmodellierung;Power BI;Semantisches Modell;;Data modeling;Power BI;Semantic model;;Power BI & Modelle;Power BI & models;nein;datamodelling;powerbi;semmodell
+DAX;Tabelle;Semantisches Modell;;DAX;Table;Semantic model;;Power BI & Modelle;Power BI & models;nein;dax;tabelle;semmodell
+Lakehouse;Power BI;Semantisches Modell;;Lakehouse;Power BI;Semantic model;;Power BI & Modelle;Power BI & models;nein;lakehouse;powerbi;semmodell
+Power BI;Tabelle;Semantisches Modell;;Power BI;Table;Semantic model;;Power BI & Modelle;Power BI & models;nein;powerbi;tabelle;semmodell
+Datensatz;Rechenleistung;Sensor;;Record;Compute;Sensor;;Echtzeit-Intelligenz;Real-Time Intelligence;nein;datensatz;rechen;sensor
+Netzwerk;Rechenleistung;Server;;Network;Compute;Server;;Grundlagen;Basics;nein;netz;rechen;server
+Apache Spark;Bronze-Schicht;Silber-Schicht;;Apache Spark;Bronze layer;Silver layer;;Data Engineering & Spark;Data engineering & Spark;nein;spark;bronze;silber
+Bronze-Schicht;Dataflow Gen2;Silber-Schicht;;Bronze layer;Dataflow Gen2;Silver layer;;Data Engineering & Spark;Data engineering & Spark;nein;bronze;dataflow;silber
+Bronze-Schicht;Notebook;Silber-Schicht;;Bronze layer;Notebook;Silver layer;;Data Engineering & Spark;Data engineering & Spark;nein;bronze;notebook;silber
+Bronze-Schicht;Skript;Silber-Schicht;;Bronze layer;Script;Silver layer;;Data Engineering & Spark;Data engineering & Spark;nein;bronze;skript;silber
+Bronze-Schicht;Transformation;Silber-Schicht;;Bronze layer;Transformation;Silver layer;;Data Engineering & Spark;Data engineering & Spark;nein;bronze;transformation;silber
+Cluster;Kapazität;Skalierung;;Cluster;Capacity;Scaling;;Kapazität & Kosten;Capacity & cost;nein;cluster;kapazitaet;skalierung
+Cluster;Rechenleistung;Skalierung;;Cluster;Compute;Scaling;;Kapazität & Kosten;Capacity & cost;nein;cluster;rechen;skalierung
+Cluster;Server;Skalierung;;Cluster;Server;Scaling;;Kapazität & Kosten;Capacity & cost;nein;cluster;server;skalierung
+Datei;Rechenleistung;Skript;;File;Compute;Script;;Grundlagen;Basics;nein;datei;rechen;skript
+Daten;Rechenleistung;Skript;;Data;Compute;Script;;Grundlagen;Basics;nein;daten;rechen;skript
+Cloud;Data Warehouse;Snowflake;;Cloud;Data warehouse;Snowflake;;Cloud & Partner;Cloud & partners;nein;cloud;warehouse;snowflake
+Apache Spark;T-SQL;Spark SQL;;Apache Spark;T-SQL;Spark SQL;;Data Engineering & Spark;Data engineering & Spark;ja;spark;sql;sparksql
+Cluster;T-SQL;Spark SQL;;Cluster;T-SQL;Spark SQL;;Data Engineering & Spark;Data engineering & Spark;ja;cluster;sql;sparksql
+Notebook;T-SQL;Spark SQL;;Notebook;T-SQL;Spark SQL;;Data Engineering & Spark;Data engineering & Spark;ja;notebook;sql;sparksql
+Apache Spark;Cluster;Spark-Pool;;Apache Spark;Cluster;Spark pool;;Data Engineering & Spark;Data engineering & Spark;nein;spark;cluster;sparkpool
+Apache Spark;Kapazität;Spark-Pool;;Apache Spark;Capacity;Spark pool;;Data Engineering & Spark;Data engineering & Spark;nein;spark;kapazitaet;sparkpool
+Cluster;PySpark;Spark-Pool;;Cluster;PySpark;Spark pool;;Data Engineering & Spark;Data engineering & Spark;nein;cluster;pyspark;sparkpool
+Amazon S3;Quelle;Spiegelung;;Amazon S3;Source;Mirroring;;Fabric-Plattform;Fabric platform;ja;s3;quelle;spiegelung
+Azure SQL;Microsoft Fabric;Spiegelung;;Azure SQL;Microsoft Fabric;Mirroring;;Fabric-Plattform;Fabric platform;ja;azuresql;fabric;spiegelung
+Cosmos DB;Microsoft Fabric;Spiegelung;;Cosmos DB;Microsoft Fabric;Mirroring;;Fabric-Plattform;Fabric platform;ja;cosmos;fabric;spiegelung
+Datenbank;Kopie;Spiegelung;;Database;Copy;Mirroring;;Fabric-Plattform;Fabric platform;ja;datenbank;kopie;spiegelung
+Kopie;OneLake;Spiegelung;;Copy;OneLake;Mirroring;;Fabric-Plattform;Fabric platform;ja;kopie;onelake;spiegelung
+Kopie;SQL Server;Spiegelung;;Copy;SQL Server;Mirroring;;Fabric-Plattform;Fabric platform;ja;kopie;sqlserver;spiegelung
+Lakehouse;SAP;Spiegelung;;Lakehouse;SAP;Mirroring;;Fabric-Plattform;Fabric platform;ja;lakehouse;sap;spiegelung
+Microsoft Fabric;Quelle;Spiegelung;;Microsoft Fabric;Source;Mirroring;;Fabric-Plattform;Fabric platform;ja;fabric;quelle;spiegelung
+Microsoft Fabric;Snowflake;Spiegelung;;Microsoft Fabric;Snowflake;Mirroring;;Fabric-Plattform;Fabric platform;ja;fabric;snowflake;spiegelung
+Microsoft Fabric;SQL Server;Spiegelung;;Microsoft Fabric;SQL Server;Mirroring;;Fabric-Plattform;Fabric platform;ja;fabric;sqlserver;spiegelung
+OneLake;SAP;Spiegelung;;OneLake;SAP;Mirroring;;Fabric-Plattform;Fabric platform;ja;onelake;sap;spiegelung
+OneLake;SQL Server;Spiegelung;;OneLake;SQL Server;Mirroring;;Fabric-Plattform;Fabric platform;ja;onelake;sqlserver;spiegelung
+Daten;Server;SQL Server;;Data;Server;SQL Server;;Datenbanken & SQL;Databases & SQL;nein;daten;server;sqlserver
+Server;T-SQL;SQL Server;;Server;T-SQL;SQL Server;;Datenbanken & SQL;Databases & SQL;nein;server;sql;sqlserver
+Abfrage;Lakehouse;SQL-Analyseendpunkt;;Query;Lakehouse;SQL analytics endpoint;;Fabric-Plattform;Fabric platform;ja;abfrage;lakehouse;sqlendpunkt
+Delta-Tabelle;T-SQL;SQL-Analyseendpunkt;;Delta table;T-SQL;SQL analytics endpoint;;Fabric-Plattform;Fabric platform;ja;delta;sql;sqlendpunkt
+Lakehouse;T-SQL;SQL-Analyseendpunkt;;Lakehouse;T-SQL;SQL analytics endpoint;;Fabric-Plattform;Fabric platform;ja;lakehouse;sql;sqlendpunkt
+Datenmodellierung;Power BI;Sternschema;;Data modeling;Power BI;Star schema;;Power BI & Modelle;Power BI & models;ja;datamodelling;powerbi;sternschema
+Abfrage;Datei;Suche;;Query;File;Search;;Datenbanken & SQL;Databases & SQL;nein;abfrage;datei;suche
+Abfrage;Skript;T-SQL;;Query;Script;T-SQL;;Datenbanken & SQL;Databases & SQL;nein;abfrage;skript;sql
+Data Warehouse;Skript;T-SQL;;Data warehouse;Script;T-SQL;;Datenbanken & SQL;Databases & SQL;nein;warehouse;skript;sql
+Datenbank;Notebook-Sprachen;T-SQL;;Database;Notebook languages;T-SQL;;Datenbanken & SQL;Databases & SQL;nein;datenbank;sprachen;sql
+Datenbank;Skript;T-SQL;;Database;Script;T-SQL;;Datenbanken & SQL;Databases & SQL;nein;datenbank;skript;sql
+Notebook-Sprachen;SQL Server;T-SQL;;Notebook languages;SQL Server;T-SQL;;Datenbanken & SQL;Databases & SQL;nein;sprachen;sqlserver;sql
+Skript;SQL Server;T-SQL;;Script;SQL Server;T-SQL;;Datenbanken & SQL;Databases & SQL;nein;skript;sqlserver;sql
+Datei;Datensatz;Tabelle;;File;Record;Table;;Datenbanken & SQL;Databases & SQL;nein;datei;datensatz;tabelle
+Datei;Datensätze;Tabelle;;File;Records;Table;;Datenbanken & SQL;Databases & SQL;nein;datei;datensaetze;tabelle
+Daten;Datensätze;Tabelle;;Data;Records;Table;;Datenbanken & SQL;Databases & SQL;nein;daten;datensaetze;tabelle
+Datensätze;Datensätze;Tabelle;;Records;Records;Table;;Datenbanken & SQL;Databases & SQL;nein;datensaetze;datensaetze;tabelle
+Community;Semantisches Modell;Tabular Editor;;Community;Semantic model;Tabular Editor;;Community;Community;ja;community;semmodell;tabulareditor
+Tod;Uhr;Temp;;Death;Clock;Temp;;Datenbanken & SQL;Databases & SQL;nein;tod;uhr;temp
+Bereitstellung;Microsoft Azure;Terraform;;Deployment;Microsoft Azure;Terraform;;DevOps & Betrieb;DevOps & operations;nein;bereitstellung;azure;terraform
+CLI;Microsoft Azure;Terraform;;CLI;Microsoft Azure;Terraform;;DevOps & Betrieb;DevOps & operations;nein;cli;azure;terraform
+Microsoft Azure;Skript;Terraform;;Microsoft Azure;Script;Terraform;;DevOps & Betrieb;DevOps & operations;nein;azure;skript;terraform
+Bereitstellungspipeline;DEV (Entwicklung);Test;;Deployment pipeline;DEV (development);Test;;DevOps & Betrieb;DevOps & operations;nein;deploy;entwicklung;test
+Datensatz;DEV (Entwicklung);Test;;Record;DEV (development);Test;;DevOps & Betrieb;DevOps & operations;nein;datensatz;entwicklung;test
+DEV (Entwicklung);Kennzahl;Test;;DEV (development);Measure;Test;;DevOps & Betrieb;DevOps & operations;nein;entwicklung;kennzahl;test
+DEV (Entwicklung);Tabelle;Test;;DEV (development);Table;Test;;DevOps & Betrieb;DevOps & operations;nein;entwicklung;tabelle;test
+DEV (Entwicklung);Ziel;Test;;DEV (development);Destination;Test;;DevOps & Betrieb;DevOps & operations;nein;entwicklung;ziel;test
+Delta-Tabelle;Uhr;Time Travel;;Delta table;Clock;Time travel;;Dateien & Formate;Files & formats;ja;delta;uhr;timetravel
+Composite-Modell (3. Ebene);Semantisches Modell;Tod;;Composite model (3rd level);Semantic model;Death;;Spaß & Zahlen;Fun & numbers;nein;composite3;semmodell;tod
+n:m-Beziehung;Power BI;Tod;;Many-to-many relationship;Power BI;Death;;Spaß & Zahlen;Fun & numbers;nein;relnm;powerbi;tod
+Dataflow Gen2;Tabelle;Transformation;;Dataflow Gen2;Table;Transformation;;Datenintegration;Data integration;nein;dataflow;tabelle;transformation
+Datensatz;M (Power Query);Transformation;;Record;M (Power Query);Transformation;;Datenintegration;Data integration;nein;datensatz;m;transformation
+Datensatz;Skript;Transformation;;Record;Script;Transformation;;Datenintegration;Data integration;nein;datensatz;skript;transformation
+Aktion;Uhr;Trigger;;Action;Clock;Trigger;;Datenintegration;Data integration;nein;aktion;uhr;trigger
+Ereignis;Skript;Trigger;;Event;Script;Trigger;;Datenintegration;Data integration;nein;ereignis;skript;trigger
+Analyse;Uhr;Überwachung;;Analysis;Clock;Monitoring;;DevOps & Betrieb;DevOps & operations;nein;analyse;uhr;monitoring
+Dashboard;Kennzahl;Überwachung;;Dashboard;Measure;Monitoring;;DevOps & Betrieb;DevOps & operations;nein;dashboard;kennzahl;monitoring
+Dashboard;Uhr;Überwachung;;Dashboard;Clock;Monitoring;;DevOps & Betrieb;DevOps & operations;nein;dashboard;uhr;monitoring
+Kennzahl;Uhr;Überwachung;;Measure;Clock;Monitoring;;DevOps & Betrieb;DevOps & operations;nein;kennzahl;uhr;monitoring
+Arbeitsbereich;Überwachung;Überwachungshub;;Workspace;Monitoring;Monitor hub;;DevOps & Betrieb;DevOps & operations;ja;arbeitsbereich;monitoring;monhub
+Datenpipeline;Überwachung;Überwachungshub;;Data pipeline;Monitoring;Monitor hub;;DevOps & Betrieb;DevOps & operations;ja;pipeline;monitoring;monhub
+Microsoft Fabric;Überwachung;Überwachungshub;;Microsoft Fabric;Monitoring;Monitor hub;;DevOps & Betrieb;DevOps & operations;ja;fabric;monitoring;monhub
+Rechenleistung;Rechenleistung;Uhr;;Compute;Compute;Clock;;Grundlagen;Basics;nein;rechen;rechen;uhr
+Community;Datenteam;User Group;;Community;Data team;User group;;Community;Community;nein;community;team;usergroup
+Cache;Delta-Tabelle;V-Order;;Cache;Delta table;V-Order;;Dateien & Formate;Files & formats;ja;cache;delta;vorder
+Cache;Parquet;V-Order;;Cache;Parquet;V-Order;;Dateien & Formate;Files & formats;ja;cache;parquet;vorder
+Delta-Tabelle;Optimierung;V-Order;;Delta table;Optimization;V-Order;;Dateien & Formate;Files & formats;ja;delta;optimierung;vorder
+Optimierung;Parquet;V-Order;;Optimization;Parquet;V-Order;;Dateien & Formate;Files & formats;ja;optimierung;parquet;vorder
+Abkürzung;Datei;Verknüpfung;;Fast path;File;Shortcut;;Fabric-Plattform;Fabric platform;ja;abkuerzung;datei;verknuepfung
+Abkürzung;Daten;Verknüpfung;;Fast path;Data;Shortcut;;Fabric-Plattform;Fabric platform;ja;abkuerzung;daten;verknuepfung
+Abkürzung;OneLake;Verknüpfung;;Fast path;OneLake;Shortcut;;Fabric-Plattform;Fabric platform;ja;abkuerzung;onelake;verknuepfung
+Amazon S3;OneLake;Verknüpfung;;Amazon S3;OneLake;Shortcut;;Fabric-Plattform;Fabric platform;ja;s3;onelake;verknuepfung
+Azure Data Lake Storage;Microsoft Fabric;Verknüpfung;;Azure Data Lake Storage;Microsoft Fabric;Shortcut;;Fabric-Plattform;Fabric platform;ja;adls;fabric;verknuepfung
+Azure Data Lake Storage;OneLake;Verknüpfung;;Azure Data Lake Storage;OneLake;Shortcut;;Fabric-Plattform;Fabric platform;ja;adls;onelake;verknuepfung
+Databricks;OneLake;Verknüpfung;;Databricks;OneLake;Shortcut;;Fabric-Plattform;Fabric platform;ja;databricks;onelake;verknuepfung
+Datei;OneLake;Verknüpfung;;File;OneLake;Shortcut;;Fabric-Plattform;Fabric platform;ja;datei;onelake;verknuepfung
+OneLake;Quelle;Verknüpfung;;OneLake;Source;Shortcut;;Fabric-Plattform;Fabric platform;ja;onelake;quelle;verknuepfung
+OneLake;Snowflake;Verknüpfung;;OneLake;Snowflake;Shortcut;;Fabric-Plattform;Fabric platform;ja;onelake;snowflake;verknuepfung
+Tabelle;Temp;View;;Table;Temp;View;;Datenbanken & SQL;Databases & SQL;nein;tabelle;temp;view
+Analyse;Kennzahl;Visualisierung;;Analysis;Measure;Visualization;;Power BI & Modelle;Power BI & models;nein;analyse;kennzahl;visual
+Daten;Kennzahl;Visualisierung;;Data;Measure;Visualization;;Power BI & Modelle;Power BI & models;nein;daten;kennzahl;visual
+Datensatz;Kennzahl;Visualisierung;;Record;Measure;Visualization;;Power BI & Modelle;Power BI & models;nein;datensatz;kennzahl;visual
+Copilot;Excel;Work IQ;;Copilot;Excel;Work IQ;;KI & Data Science;AI & data science;nein;copilot;excel;workiq
+Copilot;Metadaten;Work IQ;;Copilot;Metadata;Work IQ;;KI & Data Science;AI & data science;nein;copilot;metadata;workiq
+Copilot;Uhr;Work IQ;;Copilot;Clock;Work IQ;;KI & Data Science;AI & data science;nein;copilot;uhr;workiq
+Excel;KI;Work IQ;;Excel;AI;Work IQ;;KI & Data Science;AI & data science;nein;excel;ki;workiq
+Datensicherheit;Power BI;Zeilenebenensicherheit;;Data security;Power BI;Row-level security;;Governance & Sicherheit;Governance & security;ja;sicherheit;powerbi;rls
+Datei;Speicher;Ziel;;File;Storage;Destination;;Datenintegration;Data integration;nein;datei;speicher;ziel
+Datenbank;Speicher;Ziel;;Database;Storage;Destination;;Datenintegration;Data integration;nein;datenbank;speicher;ziel

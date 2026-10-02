@@ -185,6 +185,45 @@ const RECIPES = [
   ["abfrage","datei","excel"],["abfrage","datei","csv"],["excel","powerbi","export"],["csv","powerbi","export"],
   ["csv","fabric","onelake"],["excel","fabric","onelake"],
 
+  // --- Weitere Kombinationen (Runde 4) ---
+  ["semmodell","semmodell","composite"],["composite","semmodell","composite2"],["composite2","semmodell","composite3"],
+  ["composite3","semmodell","tod"],["powerbi","relnm","tod"],
+  ["uhr","tod","temp"],["tabelle","temp","view"],["view","speicher","matview"],
+  ["semmodell","button","refresh"],["trigger","manual","button"],
+  ["uhr","aktion","trigger"],["ereignis","skript","trigger"],["admin","aktion","manual"],["ingenieur","aktion","manual"],
+  ["kapazitaet","datensatz","smallbudget"],["fabcap","datensatz","smallbudget"],
+  ["sku","smallbudget","f2"],["f2","f2","f4"],["f4","f4","f8"],["f8","f8","f16"],["f16","f16","f32"],
+  ["f32","f32","f64"],["f32","f32","powerbi"],["f64","f64","bigbucks"],["powerbi","f64","nomoney"],
+  ["datascience","analyst","datascientist"],["mlmodell","analyst","datascientist"],
+  ["index","datascientist","one"],["index","ingenieur","zero"],["zero","one","io"],
+  // Daten WG: jeder Data-Job (Dateningenieur, Datenanalyst, Data Scientist, künftige Rollen) + Power BI oder Fabric
+  ["powerbi","ingenieur","datawg"],["fabric","ingenieur","datawg"],
+  ["powerbi","analyst","datawg"],["fabric","analyst","datawg"],
+  ["powerbi","datascientist","datawg"],["fabric","datascientist","datawg"],
+  ["team","powerbi","datawg"],["team","fabric","datawg"],
+  ["azure","databricks","azdatabricks"],
+  ["daten","katalog","metadata"],["daten","herkunft","metadata"],["etl","metadata","mdetl"],
+  ["powerbi","excel","exportexcel"],["powerbi","csv","exportcsv"],
+  ["datamodelling","powerbi","semmodell"],["datamodelling","powerbi","sternschema"],
+
+  // --- Weitere Kombinationen (Runde 5) ---
+  ["directlake","refresh","reframing"],["directlake","uhr","reframing"],["metadata","directlake","reframing"],["delta","refresh","reframing"],
+  ["metadata","beziehung","ontology"],["datamodelling","metadata","ontology"],["semmodell","governance","ontology"],
+  ["ontology","fabric","fabriciq"],["semmodell","agent","fabriciq"],["agent","fabric","fabriciq"],["agent","ontology","fabriciq"],
+  ["copilot","metadata","workiq"],["copilot","excel","workiq"],["copilot","uhr","workiq"],["ki","excel","workiq"],
+  ["tabelle","katalog","metadata"],["datei","katalog","metadata"],["parquet","katalog","metadata"],["delta","herkunft","metadata"],
+  ["fabriciq","workiq","microsoftiq"],
+
+  // --- Community ---
+  ["datawg","netz","community"],["datawg","datawg","community"],["team","team","community"],
+  ["community","fabric","fabriccommunity"],["team","community","usergroup"],["usergroup","ereignis","meetup"],
+  ["community","ereignis","fabcon"],["community","powerbi","giac"],
+  ["community","dax","daxstudio"],["community","semmodell","tabulareditor"],
+  ["community","ingenieur","mvp"],["community","analyst","mvp"],["community","datascientist","mvp"],
+  ["community","github","toolbox"],
+  ["usergroup","powerbi","pbig"],["meetup","powerbi","pbig"],
+  ["usergroup","sqlserver","datamonsters"],["meetup","sqlserver","datamonsters"],
+
   // --- Team ---
   ["notebook","pipeline","ingenieur"],["bericht","kennzahl","analyst"],["ingenieur","analyst","team"]
 ];

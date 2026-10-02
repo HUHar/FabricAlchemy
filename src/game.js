@@ -56,6 +56,18 @@
   });
   const total = Object.keys(EMOJI).length;
 
+  // --- Ordner und finale Elemente ---
+  // Final = kommt in keinem Rezept als Zutat vor, lässt sich also nicht weiter kombinieren (roter Punkt).
+  const FOLDER_KEY = "fabric-alchemie-folders";
+  const folderOf = {};
+  CATEGORIES.forEach(([f, els]) => els.forEach(id => { folderOf[id] = f; }));
+  const usedAsIngredient = new Set(RECIPES.flatMap(r => [r[0], r[1]]));
+  const isFinal = id => !usedAsIngredient.has(id);
+  let closed = new Set();   // eingeklappte Ordner
+  try{ closed = new Set(JSON.parse(localStorage.getItem(FOLDER_KEY)) || []); }catch(e){}
+  const saveFolders = () => { try{ localStorage.setItem(FOLDER_KEY, JSON.stringify([...closed])); }catch(e){} };
+  const openFolderOf = id => { if(closed.delete(folderOf[id])) saveFolders(); };
+
   let found = [...BASE];
   let fresh = new Set();
   let won = false;
@@ -74,20 +86,48 @@
   }
 
   /* ---------- Sidebar ---------- */
-  function chipHTML(id){ const [n,e] = ELEMENTS[id]; return `<span class="e">${e}</span><span>${n}</span>`; }
+  function chipHTML(id){
+    const [n,e] = ELEMENTS[id];
+    return `<span class="e">${e}</span><span>${n}</span>${isFinal(id) ? '<i class="final"></i>' : ""}`;
+  }
 
   function renderList(){
     const q = $("#search").value.trim().toLowerCase();
+    const scroll = list.scrollTop;
     list.innerHTML = "";
-    found.forEach(id => {
-      const name = ELEMENTS[id][0];
-      if(q && !name.toLowerCase().includes(q)) return;
-      const c = document.createElement("div");
-      c.className = "chip" + (BASE.includes(id) ? " base" : "") + (fresh.has(id) ? " fresh" : "");
-      c.dataset.id = id; c.innerHTML = chipHTML(id);
-      c.addEventListener("pointerdown", ev => startDrag(ev, id, null));
-      list.appendChild(c);
+    CATEGORIES.forEach(([fid, members]) => {
+      const mine = found.filter(id => folderOf[id] === fid);
+      const shown = q ? mine.filter(id => ELEMENTS[id][0].toLowerCase().includes(q)) : mine;
+      if(!shown.length) return;
+      const open = !!q || !closed.has(fid);   // bei einer Suche sind alle Treffer-Ordner offen
+      const box = document.createElement("div");
+      box.className = "folder" + (open ? " open" : "");
+      const head = document.createElement("div");
+      head.className = "folder-h";
+      head.innerHTML = `<span class="arrow">▸</span><span class="fname">${esc(I18N.folders[fid])}</span>` +
+        `<span class="fcount">${mine.length}/${members.length}</span>` +
+        (mine.some(id => fresh.has(id)) ? '<i class="fresh-dot"></i>' : "");
+      head.addEventListener("click", () => {
+        if(q) return;
+        if(closed.has(fid)) closed.delete(fid); else closed.add(fid);
+        saveFolders(); renderList();
+      });
+      box.appendChild(head);
+      if(open){
+        const body = document.createElement("div");
+        body.className = "folder-b";
+        shown.forEach(id => {
+          const c = document.createElement("div");
+          c.className = "chip" + (BASE.includes(id) ? " base" : "") + (fresh.has(id) ? " fresh" : "");
+          c.dataset.id = id; c.innerHTML = chipHTML(id);
+          c.addEventListener("pointerdown", ev => startDrag(ev, id, null));
+          body.appendChild(c);
+        });
+        box.appendChild(body);
+      }
+      list.appendChild(box);
     });
+    list.scrollTop = scroll;
     $("#bar").style.width = (found.length/total*100) + "%";
     $("#count").textContent = T("count", {n: found.length, total});
   }
@@ -219,6 +259,7 @@
       if(!found.includes(id)){ found.push(id); fresh.add(id); fresh_.push(id); }
     });
     if(!fresh_.length) return;
+    fresh_.forEach(openFolderOf);   // Ordner mit neuen Elementen aufklappen
     save(); renderList();
     toast("", fresh_.map(id => { const [name, emoji, desc] = ELEMENTS[id]; return T("newFound", {emoji, name, desc}); }).join("<br><br>"));
     const chip = list.querySelector(`.chip[data-id="${fresh_[0]}"]`);
@@ -255,7 +296,9 @@
     const [name, emoji, desc] = ELEMENTS[id];
     const [path, video] = LINKS[id] || [null, null];
     let s = `<div class="h">${emoji} ${esc(name)}</div><div class="d">${esc(desc)}</div>`;
-    if(path) s += `<a href="${I18N.learn}${path}" target="_blank" rel="noopener">${T("learnLink")}</a>`;
+    if(isFinal(id)) s += `<div class="fin">${esc(T("finalNote"))}</div>`;
+    if(path && /^https?:\/\//.test(path)) s += `<a href="${path}" target="_blank" rel="noopener">${T("webLink")}</a>`;
+    else if(path) s += `<a href="${I18N.learn}${path}" target="_blank" rel="noopener">${T("learnLink")}</a>`;
     if(video) s += `<a href="${video}" target="_blank" rel="noopener">${T("videoLink")}</a>`;
     return s;
   }
@@ -295,6 +338,7 @@
     }
     const [a,b] = open[Math.floor(Math.random()*open.length)];
     toast("info", T("hintMsg", {a: ELEMENTS[a][0], b: ELEMENTS[b][0]}));
+    [a,b].forEach(openFolderOf); renderList();   // Ordner der beiden Zutaten aufklappen
     [a,b].forEach(id => {
       const c = list.querySelector(`.chip[data-id="${id}"]`);
       if(c){ c.classList.add("hint"); setTimeout(() => c.classList.remove("hint"), 3000); }

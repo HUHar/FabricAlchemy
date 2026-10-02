@@ -16,7 +16,8 @@ src/
   data/                   sprachneutral
     elements.js           alle Element-IDs mit Symbol
     recipes.js            Rezepte, Grundelemente, Ziel
-    links.js              Learn-Pfade (ohne Sprachkürzel) und optionale Video-Links
+    links.js              Learn-Pfade (ohne Sprachkürzel), eigene Web-Adressen und optionale Video-Links
+    categories.js         Ordner der Elementliste: welches Element in welchen Ordner gehört
   i18n/                   eine Datei pro Sprache
     de.js                 Oberflächentexte + Name/Beschreibung jedes Elements
     en.js                 englische Version (vollständig)
@@ -46,10 +47,11 @@ Fehlen Texte in einer anderen Sprache, wird der deutsche Text als Ersatz genomme
 ## Neues Element anlegen
 
 1. `src/data/elements.js`: ID und Symbol eintragen
-2. `src/i18n/de.js` (und wenn vorhanden `en.js`): `id: ["Name", "Beschreibung"]`
+2. `src/i18n/de.js` und `en.js`: `id: ["Name", "Beschreibung"]`
 3. `src/data/links.js`: `id: ["/learn-pfad", null]` (`null` = kein Link)
-4. `src/data/recipes.js`: mindestens ein Rezept, das das Element erzeugt
-5. `node build.js`
+4. `src/data/categories.js`: das Element in genau einen Ordner eintragen
+5. `src/data/recipes.js`: mindestens ein Rezept, das das Element erzeugt
+6. `node build.js` – baut das Spiel und aktualisiert `kombinationen.csv`
 
 ## Rezepte
 
@@ -64,6 +66,13 @@ Ein Ergebnis darf mehrere Rezepte haben, und ein Zutatenpaar darf mehrere Ergebn
 
 Die Learn-Pfade in `links.js` sind in allen Sprachen gleich. Sie wurden für `de-de` und `en-us` geprüft, für andere Sprachen nicht.
 
+## Ordner und finale Elemente
+
+Die Elementliste ist in Ordner einsortiert (Grundlagen, Dateien, Datenbanken, Fabric-Plattform, Datenintegration, Echtzeit, Data Engineering, Power BI, KI, Governance, Kapazität, Cloud, DevOps, Rollen, Spaß). Ordner lassen sich ein- und ausklappen; der Zustand wird im Browser gemerkt. Ein Ordner mit neuen Elementen klappt von selbst auf.
+Die Ordner stehen in `src/data/categories.js`, ihre Namen je Sprache unter `folders` in `src/i18n/*.js`. `build.js` prüft, dass jedes Element in genau einem Ordner liegt.
+
+Ein **roter Punkt** kennzeichnet finale Elemente. Das sind Elemente, die in keinem Rezept als Zutat vorkommen, sich also nicht weiter kombinieren lassen. Die Markierung wird beim Start aus den Rezepten berechnet und passt sich automatisch an, wenn ein Element später als Zutat verwendet wird. Ein **oranger Punkt** zeigt neu entdeckte Elemente.
+
 ## Spielstand
 
-Der Spielstand liegt im Browser (`localStorage`, Schlüssel `fabric-alchemie-v2`) und enthält nur Element-IDs. Er funktioniert deshalb in jeder Sprache gleich.
+Der Spielstand liegt im Browser (`localStorage`, Schlüssel `fabric-alchemie-v2`) und enthält nur Element-IDs. Er funktioniert deshalb in jeder Sprache gleich. Eingeklappte Ordner und die Sprache werden getrennt davon gespeichert.
