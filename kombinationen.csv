@@ -201,7 +201,7 @@ Semantisches Modell;Skript;DAX;;Semantic model;Script;DAX;;Power BI & Modelle;Po
 Community;DAX;DAX Studio;;Community;DAX;DAX Studio;;Community;Community;ja;community;dax;daxstudio
 Lakehouse;Parquet;Delta-Tabelle;;Lakehouse;Parquet;Delta table;;Dateien & Formate;Files & formats;nein;lakehouse;parquet;delta
 OneLake;Parquet;Delta-Tabelle;;OneLake;Parquet;Delta table;;Dateien & Formate;Files & formats;nein;onelake;parquet;delta
-Parquet;Tabelle;Delta-Tabelle;;Parquet;Table;Delta table;;Dateien & Formate;Files & formats;nein;parquet;tabelle;delta
+Parquet;Uhr;Delta-Tabelle;;Parquet;Clock;Delta table;;Dateien & Formate;Files & formats;nein;parquet;uhr;delta
 Arbeitsbereich;Notebook;DEV (Entwicklung);;Workspace;Notebook;DEV (development);;DevOps & Betrieb;DevOps & operations;nein;arbeitsbereich;notebook;entwicklung
 Git;Skript;DEV (Entwicklung);;Git;Script;DEV (development);;DevOps & Betrieb;DevOps & operations;nein;gitgen;skript;entwicklung
 Server;Skript;DEV (Entwicklung);;Server;Script;DEV (development);;DevOps & Betrieb;DevOps & operations;nein;server;skript;entwicklung
